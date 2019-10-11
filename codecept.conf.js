@@ -31,26 +31,6 @@ exports.config = {
     "timeout": 100000,
     "output": "./output",
     "include": {
-        "censusPage": "./pages/censusPage.js",
-        "phonePage": "./pages/phonePage.js",
-        "leadPage": "./pages/leadPage.js",
-        "quotePage": "./pages/quotePage.js",
-        "minisitePage": "./pages/minisitePage.js",
-        "doctorPage": "./pages/doctorPage.js",
-        "drugPage": "./pages/drugPage.js",
-        "pharmacyPage": "./pages/pharmacyPage.js",
-        "currentPlanPage": "./pages/currentPlanPage.js",
-        "compareV2Page": "./pages/compareV2Page.js",
-        "detailV2Page": "./pages/detailV2Page.js",
-        "ehimPage": "./pages/ehimPage.js",
-        "BOPage": "./pages/BOPage.js",
-        "cvsToolPage": "./pages/cvsToolPage.js",
-        "MarketLandingPage": "./pages/MarketLandingPage.js",
-        "ehmPage": "./pages/ehmPage.js",
-        "ehimPageNew": "./pages/ehimPageNew.js",
-        "headerPage": "./pages/headerPage.js",
-        "quotePageEHMP": "./pages/quotePageEHMP.js",
-        "mosePage": "./pages/mosePage.js"
     },
     "helpers": {
       // "BifrostHelper": {

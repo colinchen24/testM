@@ -1,7 +1,7 @@
 
 Feature('site monitor');
 
-Scenario('test something', async function(I) => {
+Scenario('test something', async function(I){
 
 	I.amOnPage('https://www.nike.com/cn/t/air-zoom-pegasus-36-%E7%94%B7%E5%AD%90%E8%B7%91%E6%AD%A5%E9%9E%8B-wdcW2s');
     let disable = await I.executeScript(function(){
