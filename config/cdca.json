@@ -1,0 +1,12 @@
+{
+  "env":"cdca",
+  "EHI": "https://www.qa.ehealthinsurance.com",
+  "EHM": "https://www.qa.ehealthmedicare.com",
+  "EHIM": "https://www.qa.ehealthinsurance.com/medicare-redesign",
+  "EHMP": "https://cd.ca.ehealthmedicareplans.com",
+  "MDC": "https://devmedicare.wpengine.com",
+  "defaultPlanYear": 2019,
+  "host": "test:test@10.9.77.33",
+  "port": "8088",
+  "Batch": "http://sjqamcbch01:8080"
+}

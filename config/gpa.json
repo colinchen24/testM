@@ -1,0 +1,15 @@
+{
+  "env":"gpa",
+  "EHI": "https://www.ehealthinsurance.com",
+  "EHM": "https://www.ehealthmedicare.com",
+  "EHIM": "https://www.ehealthinsurance.com/medicare",
+  "EHMP": "https://www.ehealthmedicareplans.com",
+  "MDC": "https://medicare.com",
+  "myMedicare":"http://www.myehealthmedicare.com",
+  "hostname": "sjtstsel03-win7",
+  "defaultPlanYear": 2019,
+  "host": "10.8.77.15",
+  "port": 4444,
+  "Batch": "http://sjprmcbch01:8080",
+  "connectionId": ""
+}

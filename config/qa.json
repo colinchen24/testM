@@ -1,0 +1,23 @@
+{
+  "env":"qa",
+  "EHI": "https://www.qa.ehealthinsurance.com",
+  "EHM": "https://www.qa.ehealthmedicare.com",
+  "EHIM": "https://www.qa.ehealthinsurance.com/medicare",
+  "EHMP": "https://www.qa.ehealthmedicareplans.com",
+  "MDC": "https://devmedicare.wpengine.com",
+  "myMedicare":"http://www.qa.myehealthmedicare.com",
+  "Batch": "http://sjqamcbch01:8080",
+  "MACompareLink": "#plan-compare/MA/20001/09000/DISTRICT%20OF%20COLUMBIA/ssd30506353/pH2172-003-000,H5521-015-000",
+  "MDCompareLink": "#plan-compare/MD/20001/09000/DISTRICT%20OF%20COLUMBIA/ssd30506353/pS5820-004-000,S4802-140-000",
+  "docSession": "ssd30693292",
+  "backOfficeURL": "https://www9.qa.ehealthinsurance.com/bov2/login.html",
+  "minisiteURL": "https://www.qa.ehealthmedicareplans.com/kroger",
+  "savePlansToLeadInCart":"/?medicarecom=3&webLeadConfig=1&allid=Med41422&agentID=341744&type=MS&page=plan-cart&zip=90001&county=LOS%20ANGELES&gd1=F&smoker1=N&bdate1=4/5/1949&ehiPlans=MS%3a90147600%3a25%7cMD%3a90130600%3a11%7cMA%3a90133700%3a84&planYear=2018",
+  "msPlansListPageWithCart":"/?medicarecom=3&webLeadConfig=1&leadId=10071551&allid=Med41422&agentID=341744&type=MS&zip=90001&county=LOS ANGELES&gd1=F&smoker1=N&bdate1=4/5/1949&ehiPlans=MS%3A90117900%3A53%7CMD%3A90120600%3A8&planYear=2018",
+  "personalCode": "V8DND2NDV214",
+  "DOB": "05241932",
+  "defaultPlanYear": 2019,
+  "host": "test:test@10.9.77.33",
+  "port": 8088,
+  "connectionId": "gbJMcjDSEmlkJC4E"
+}

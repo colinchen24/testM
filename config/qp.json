@@ -1,0 +1,17 @@
+{
+  "env":"qp",
+  "EHI": "https://www.qp.ehealthinsurance.com",
+  "EHM": "https://www.qa.ehealthmedicare.com",
+  "EHIM": "https://www.qa.ehealthinsurance.com/medicare",
+  "EHMP": "https://www.qp.ehealthmedicareplans.com",
+  "MDC": "https://devmedicare.wpengine.com",
+  "myMedicare":"http://www.qp.myehealthmedicare.com",
+  "Batch": "http://sjqpmcbch01:8080",
+  "defaultPlanYear": 2019,
+  "host": "test:test@10.9.77.33",
+  "port": "8088",
+  "MACompareLink": "#plan-compare/MA/20001/09000/DISTRICT%20OF%20COLUMBIA/ssd30506353/pH2172-003-000,H5521-015-000",
+  "MDCompareLink": "#plan-compare/MD/20001/09000/DISTRICT%20OF%20COLUMBIA/ssd30506353/pS5820-004-000,S4802-140-000",
+  "connectionId": "gbJMcjDSEmlkJC4E",
+  "docSession": "ssd30693292"
+}
