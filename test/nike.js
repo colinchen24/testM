@@ -13,7 +13,7 @@ Scenario('monitor nike', async function(I) {
 
     for (var k = 0; k < list.length; k++) {
         try {
-            I.wait(10);
+            I.wait(30);
             I.amOnPage(list[k].url);
             let availiabled = await I.executeScript(function(size) {
                 for (var i = 0; i < document.getElementsByName('skuAndSize').length; i++) {
@@ -25,7 +25,7 @@ Scenario('monitor nike', async function(I) {
             }, list[k].size);
             if (!availiabled) {
                 I.saveScreenshot('result.jpg');
-                await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k]);
+                await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
                 I.track({"url": list[k].url, "size": list[k].size, "status": 'enabled', "time": now})
             } else {
                 I.track({"url": list[k].url, "size": list[k].size, "status": 'disabled', "time": now})
