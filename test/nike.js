@@ -23,8 +23,8 @@ Scenario('monitor nike', async function(I) {
                 }
                 return false;
             }, list[k].size);
-
-            if (availiabled) {
+            if (!availiabled) {
+                I.saveScreenshot('result.jpg');
                 await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k]);
                 I.track({"url": list[k].url, "size": list[k].size, "status": 'enabled', "time": now})
             } else {
