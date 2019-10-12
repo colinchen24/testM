@@ -1,9 +1,13 @@
+
 Feature('just do it');
 
+var dateFormat = require('dateformat');
 
 Scenario('monitor nike', async function(I) {
 
     var list = await I.MonitorList();
+
+    var now =dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT");
 
     list = JSON.parse(list);
 
@@ -20,11 +24,15 @@ Scenario('monitor nike', async function(I) {
             }, list[k].size);
 
             if (availiabled) {
-                await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping!');
+                await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k]);
+                I.track({"url": list[k].url, "size": list[k].size, "status": 'enabled', "time": now})
+            } else {
+                I.track({"url": list[k].url, "size": list[k].size, "status": 'disabled', "time": now})
             }
 
         } catch (err) {
             console.log(err)
+            I.track({"url": list[k].url, "size": list[k].size, "status": 'error', "time": now})
         }
 
     }
