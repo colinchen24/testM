@@ -13,6 +13,7 @@ Scenario('monitor nike', async function(I) {
 
     for (var k = 0; k < list.length; k++) {
         try {
+            I.await(10);
             I.amOnPage(list[k].url);
             let availiabled = await I.executeScript(function(size) {
                 for (var i = 0; i < document.getElementsByName('skuAndSize').length; i++) {
