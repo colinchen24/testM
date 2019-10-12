@@ -55,7 +55,7 @@ exports.config = {
             //"seleniumAddress": '10.8.77.14' +":"+ '4445',
             "desiredCapabilities": {
                 "browserName": "chrome",
-                "version":"71.0",
+                "version":"77.0",
                 "enableVNC":true,
                 "enableVideo":false,
                 "name":"Medicare XM E2E",

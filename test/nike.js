@@ -1,21 +1,33 @@
+Feature('just do it');
 
-Feature('site monitor');
 
-Scenario('test something', async function(I){
+Scenario('monitor nike', async function(I) {
 
-	I.amOnPage('https://www.nike.com/cn/t/air-zoom-pegasus-36-%E7%94%B7%E5%AD%90%E8%B7%91%E6%AD%A5%E9%9E%8B-wdcW2s');
-    let disable = await I.executeScript(function(){
-        return document.getElementsByName('skuAndSize')[16].disabled;
-    });
-    console.log('------------');
-    console.log(disable);
-    if(disable){
-        await I.sendEmail('colin.chen@ehealth.com', 'it is disabale');
+    var list = await I.MonitorList();
+
+    list = JSON.parse(list);
+
+    for (var k = 0; k < list.length; k++) {
+        try {
+            I.amOnPage(list[k].url);
+            let availiabled = await I.executeScript(function(size) {
+                for (var i = 0; i < document.getElementsByName('skuAndSize').length; i++) {
+                    if (document.getElementsByName('skuAndSize')[i].getAttribute('aria-label') === size && document.getElementsByName('skuAndSize')[i].getAttribute('disabled') != "") {
+                        return true;
+                    }
+                }
+                return false;
+            }, list[k].size);
+
+            if (availiabled) {
+                await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping!');
+            }
+
+        } catch (err) {
+            console.log(err)
+        }
+
     }
-    let disable2 = await I.executeScript(function(){
-        return document.getElementsByName('skuAndSize')[0].disabled;
-    });
-    console.log('------------');
-    console.log(disable2);
+
 
 });

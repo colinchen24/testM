@@ -20,6 +20,8 @@
     "codeceptjs": "^2.0.4",
     "dateformat": "^3.0.3",
     "moment-timezone": "^0.5.25",
+    "nedb": "^1.8.0",
+    "node-json-db": "^1.0.1",
     "selenium-standalone": "^6.12.0"
   }
 }
