@@ -11,10 +11,17 @@ Scenario('monitor nike', async function(I) {
 
     list = JSON.parse(list);
 
+    // console.log(list)
+
     for (var k = 0; k < list.length; k++) {
         try {
             I.wait(30);
-            I.amOnPage(list[k].url);
+            if(await I.grabCurrentUrl() === list[k].url){
+                console.log('url is the same with last one.');
+            } else{
+                I.amOnPage(list[k].url);    
+            }
+            
             let availiabled = await I.executeScript(function(size) {
                 for (var i = 0; i < document.getElementsByName('skuAndSize').length; i++) {
                     if (document.getElementsByName('skuAndSize')[i].getAttribute('aria-label') === size && document.getElementsByName('skuAndSize')[i].getAttribute('disabled') != "") {
@@ -23,7 +30,8 @@ Scenario('monitor nike', async function(I) {
                 }
                 return false;
             }, list[k].size);
-            if (!availiabled) {
+
+            if (availiabled) {
                 I.saveScreenshot('result.jpg');
                 await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
                 I.track({"url": list[k].url, "size": list[k].size, "status": 'enabled', "time": now})
