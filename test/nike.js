@@ -14,10 +14,10 @@ Scenario('monitor nike', async function(I) {
 
     for (var k = 0; k < list.length; k++) {
         try {
-            I.wait(30);
             if (await I.grabCurrentUrl() === list[k].url) {
                 console.log('url is the same with last one.');
             } else {
+                I.wait(30);
                 I.amOnPage(list[k].url);
             }
 
