@@ -42,7 +42,7 @@ Scenario('monitor nike', async function(I) {
 
             if (availiabled) {
                 I.saveScreenshot('result.jpg');
-                await I.sendEmail('colin.chen@ehealth.com, lulu.ke@ehealth.com, 1017310980@qq.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
+                await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
                 I.track({
                     "url": list[k].url,
                     "size": list[k].size,
