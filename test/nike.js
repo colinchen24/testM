@@ -1,4 +1,3 @@
-
 Feature('just do it');
 
 var dateFormat = require('dateformat');
@@ -7,7 +6,7 @@ Scenario('monitor nike', async function(I) {
 
     var list = await I.MonitorList();
 
-    var now =dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT");
+    var now = dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT");
 
     list = JSON.parse(list);
 
@@ -16,16 +15,26 @@ Scenario('monitor nike', async function(I) {
     for (var k = 0; k < list.length; k++) {
         try {
             I.wait(30);
-            if(await I.grabCurrentUrl() === list[k].url){
+            if (await I.grabCurrentUrl() === list[k].url) {
                 console.log('url is the same with last one.');
-            } else{
-                I.amOnPage(list[k].url);    
+            } else {
+                I.amOnPage(list[k].url);
             }
-            
+
             let availiabled = await I.executeScript(function(size) {
-                for (var i = 0; i < document.getElementsByName('skuAndSize').length; i++) {
-                    if (document.getElementsByName('skuAndSize')[i].getAttribute('aria-label') === size && document.getElementsByName('skuAndSize')[i].getAttribute('disabled') != "") {
+                if (size === 'outOfStock') {
+                    if (document.getElementById('RightRail').innerText.indexOf('售罄') === -1) {
                         return true;
+                    }
+                } 
+                else if (document.getElementsByClassName('exp-gridwall-header-titles')[0] && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (') !== -1 && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (' + size) === -1){
+                    return true;
+                } 
+                else {
+                    for (var i = 0; i < document.getElementsByName('skuAndSize').length; i++) {
+                        if (document.getElementsByName('skuAndSize')[i].getAttribute('aria-label') === size && document.getElementsByName('skuAndSize')[i].getAttribute('disabled') != "") {
+                            return true;
+                        }
                     }
                 }
                 return false;
@@ -33,15 +42,30 @@ Scenario('monitor nike', async function(I) {
 
             if (availiabled) {
                 I.saveScreenshot('result.jpg');
-                await I.sendEmail('colin.chen@ehealth.com, lulu.ke@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
-                I.track({"url": list[k].url, "size": list[k].size, "status": 'enabled', "time": now})
+                await I.sendEmail('colin.chen@ehealth.com, lulu.ke@ehealth.com, 1017310980@qq.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
+                I.track({
+                    "url": list[k].url,
+                    "size": list[k].size,
+                    "status": 'enabled',
+                    "time": now
+                })
             } else {
-                I.track({"url": list[k].url, "size": list[k].size, "status": 'disabled', "time": now})
+                I.track({
+                    "url": list[k].url,
+                    "size": list[k].size,
+                    "status": 'disabled',
+                    "time": now
+                })
             }
 
         } catch (err) {
             console.log(err)
-            I.track({"url": list[k].url, "size": list[k].size, "status": 'error', "time": now})
+            I.track({
+                "url": list[k].url,
+                "size": list[k].size,
+                "status": 'error',
+                "time": now
+            })
         }
 
     }
