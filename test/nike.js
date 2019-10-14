@@ -33,11 +33,13 @@ Scenario('monitor nike', async function(I) {
             if (await I.grabCurrentUrl() === list[k].url) {
                 console.log('url is the same with last one.');
             } else {
+                I.clearCookie();
                 I.amOnPage(list[k].url);
                 I.wait(sleeptime);
             }
-
-            let availiabled = await I.executeScript(function(size) {
+            var availiabled = false;
+            if(I.see('Nike')) {
+                 availiabled = await I.executeScript(function(size) {
                 if (size === 'outOfStock') {
                     if (document.getElementById('RightRail').innerText.indexOf('售罄') === -1) {
                         return true;
@@ -54,7 +56,9 @@ Scenario('monitor nike', async function(I) {
                     }
                 }
                 return false;
-            }, list[k].size);
+                 }, list[k].size);
+            }
+            
 
             now = dateFormat(new Date(), "isoDateTime");
 
