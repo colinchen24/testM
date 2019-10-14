@@ -60,12 +60,12 @@ exports.config = {
                 "enableVideo":false,
                 "name":"Medicare XM E2E",
                 "build":"Medicare XM Team",
-                "chromeOptions": chromeOptions
-                // "proxy": {
-                //   "proxyType": "manual",
-                //   "sslProxy": '127.0.0.1:8085',
-                //   "noProxy": "127.0.0.1,localhost"
-                // }
+                "chromeOptions": chromeOptions,
+                "proxy": {
+                  "proxyType": "manual",
+                  "sslProxy": '104.225.156.192:8085'
+                  // "noProxy": "127.0.0.1,localhost"
+                }
               }
         }
     },
