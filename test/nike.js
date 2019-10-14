@@ -6,26 +6,26 @@ Scenario('monitor nike', async function(I) {
 
     // console.log(process.env.TIME)
 
-    var sleeptime=300;
+    var sleeptime=30;
 
     switch (process.env.TIME){
         case "sh":
-            sleeptime=30;
+            sleeptime=5;
             break;
         case "h":
-            sleeptime=180;
+            sleeptime=20;
             break;
     }
 
-    console.log(sleeptime);
+    // console.log(sleeptime);
 
     var list = await I.MonitorList({"frequency": process.env.TIME});
 
-    var now = dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT");
+    var now = dateFormat(new Date(), "isoDateTime");
 
     list = JSON.parse(list);
 
-    console.log(list)
+    // console.log(list)
 
 
     for (var k = 0; k < list.length; k++) {
@@ -56,6 +56,8 @@ Scenario('monitor nike', async function(I) {
                 return false;
             }, list[k].size);
 
+            now = dateFormat(new Date(), "isoDateTime");
+
             if (availiabled) {
                 I.saveScreenshot('result.jpg');
                 // await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
@@ -74,10 +76,11 @@ Scenario('monitor nike', async function(I) {
                 })
             }
             //forever running
-            if(k == list.length -1){
-                k=0;
+            if(k === list.length-1){
+                k = 0;
             }
         } catch (err) {
+            now = dateFormat(new Date(), "isoDateTime");
             console.log(err)
             I.track({
                 "url": list[k].url,
