@@ -4,20 +4,35 @@ var dateFormat = require('dateformat');
 
 Scenario('monitor nike', async function(I) {
 
-    var list = await I.MonitorList();
+    // console.log(process.env.TIME)
+
+    var sleeptime=300;
+
+    switch (process.env.TIME){
+        case "sh":
+            sleeptime=30;
+            break;
+        case "h":
+            sleeptime=180;
+            break;
+    }
+
+    console.log(sleeptime);
+
+    var list = await I.MonitorList({"frequency": process.env.TIME});
 
     var now = dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT");
 
     list = JSON.parse(list);
 
-    // console.log(list)
+    console.log(list)
 
     for (var k = 0; k < list.length; k++) {
         try {
             if (await I.grabCurrentUrl() === list[k].url) {
                 console.log('url is the same with last one.');
             } else {
-                I.wait(30);
+                I.wait(sleeptime);
                 I.amOnPage(list[k].url);
             }
 
@@ -42,7 +57,7 @@ Scenario('monitor nike', async function(I) {
 
             if (availiabled) {
                 I.saveScreenshot('result.jpg');
-                await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
+                // await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
                 I.track({
                     "url": list[k].url,
                     "size": list[k].size,
