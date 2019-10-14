@@ -63,7 +63,7 @@ exports.config = {
                 "chromeOptions": chromeOptions,
                 "proxy": {
                   "proxyType": "manual",
-                  "sslProxy": '104.225.156.192:8085'
+                  "httpProxy": '104.225.156.192:8085'
                   // "noProxy": "127.0.0.1,localhost"
                 }
               }
