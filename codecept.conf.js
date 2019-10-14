@@ -28,7 +28,7 @@ exports.config = {
   
     //"tests": "./test/" + String(process.profile).split("|")[0],
     "tests": process.profile,
-    "timeout": 100000,
+    "timeout": 600000,
     "output": "./output",
     "include": {
     },
