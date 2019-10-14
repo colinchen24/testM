@@ -33,49 +33,50 @@ Scenario('monitor nike', async function(I) {
             if (await I.grabCurrentUrl() === list[k].url) {
                 console.log('url is the same with last one.');
             } else {
-                // I.amOnPage(list[k].url);
-                I.amOnPage('http://www.ip138.com/');
-                I.saveScreenshot('result' + k + '.jpg');
-                I.wait(300);
+                I.amOnPage(list[k].url);
+                I.wait(sleeptime);
             }
 
-            // let availiabled = await I.executeScript(function(size) {
-            //     if (size === 'outOfStock') {
-            //         if (document.getElementById('RightRail').innerText.indexOf('售罄') === -1) {
-            //             return true;
-            //         }
-            //     } 
-            //     else if (document.getElementsByClassName('exp-gridwall-header-titles')[0] && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (') !== -1 && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (' + size) === -1){
-            //         return true;
-            //     } 
-            //     else {
-            //         for (var i = 0; i < document.getElementsByName('skuAndSize').length; i++) {
-            //             if (document.getElementsByName('skuAndSize')[i].getAttribute('aria-label') === size && document.getElementsByName('skuAndSize')[i].getAttribute('disabled') != "") {
-            //                 return true;
-            //             }
-            //         }
-            //     }
-            //     return false;
-            // }, list[k].size);
+            let availiabled = await I.executeScript(function(size) {
+                if (size === 'outOfStock') {
+                    if (document.getElementById('RightRail').innerText.indexOf('售罄') === -1) {
+                        return true;
+                    }
+                } 
+                else if (document.getElementsByClassName('exp-gridwall-header-titles')[0] && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (') !== -1 && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (' + size) === -1){
+                    return true;
+                } 
+                else {
+                    for (var i = 0; i < document.getElementsByName('skuAndSize').length; i++) {
+                        if (document.getElementsByName('skuAndSize')[i].getAttribute('aria-label') === size && document.getElementsByName('skuAndSize')[i].getAttribute('disabled') != "") {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }, list[k].size);
 
-            // if (availiabled) {
-            //     I.saveScreenshot('result.jpg');
-            //     // await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
-            //     I.track({
-            //         "url": list[k].url,
-            //         "size": list[k].size,
-            //         "status": 'enabled',
-            //         "time": now
-            //     })
-            // } else {
-            //     I.track({
-            //         "url": list[k].url,
-            //         "size": list[k].size,
-            //         "status": 'disabled',
-            //         "time": now
-            //     })
-            // }
-
+            if (availiabled) {
+                I.saveScreenshot('result.jpg');
+                // await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
+                I.track({
+                    "url": list[k].url,
+                    "size": list[k].size,
+                    "status": 'enabled',
+                    "time": now
+                })
+            } else {
+                I.track({
+                    "url": list[k].url,
+                    "size": list[k].size,
+                    "status": 'disabled',
+                    "time": now
+                })
+            }
+            //forever running
+            if(k == list.length -1){
+                k=0;
+            }
         } catch (err) {
             console.log(err)
             I.track({
@@ -85,6 +86,7 @@ Scenario('monitor nike', async function(I) {
                 "time": now
             })
         }
+
 
     }
 
