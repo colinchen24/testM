@@ -58,7 +58,7 @@ Scenario('monitor nike', async function(I) {
 
             now = dateFormat(new Date(), "isoDateTime");
 
-            if (!availiabled) {
+            if (availiabled) {
                 I.saveScreenshot('result.jpg');
                 // await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
                 I.track({
