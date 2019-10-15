@@ -33,10 +33,9 @@ Scenario('monitor nike', async function(I) {
                 await I.clearCookie();
                 I.wait(2)
                 I.amOnPage(list[k].url);
+                I.saveScreenshot('result.jpg');
                 I.wait(sleeptime);
             }
-
-            I.saveScreenshot('result.jpg');
 
             var availiabled = await I.executeScript(function(size) {
                 if(!document) {
