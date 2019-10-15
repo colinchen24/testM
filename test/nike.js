@@ -10,7 +10,7 @@ Scenario('monitor nike', async function(I) {
 
     switch (process.env.TIME){
         case "sh":
-            sleeptime=5;
+            sleeptime=8;
             break;
         case "h":
             sleeptime=30;
@@ -25,9 +25,6 @@ Scenario('monitor nike', async function(I) {
 
     list = JSON.parse(list);
 
-    // console.log(list)
-
-
     for (var k = 0; k < list.length; k++) {
         try {
             if (await I.grabCurrentUrl() === list[k].url) {
@@ -37,10 +34,11 @@ Scenario('monitor nike', async function(I) {
                 I.amOnPage(list[k].url);
                 I.wait(sleeptime);
             }
-            var availiabled = false;
-            if(I.see('Nike')) {
-                 availiabled = await I.executeScript(function(size) {
-                if (size === 'outOfStock') {
+
+            var availiabled = = await I.executeScript(function(size) {
+                if(!document) {
+                    return false
+                } else if (size === 'outOfStock') {
                     if (document.getElementById('RightRail').innerText.indexOf('售罄') === -1) {
                         return true;
                     }
@@ -57,12 +55,10 @@ Scenario('monitor nike', async function(I) {
                 }
                 return false;
                  }, list[k].size);
-            }
-            
 
             now = dateFormat(new Date(), "isoDateTime");
 
-            if (availiabled) {
+            if (!availiabled) {
                 I.saveScreenshot('result.jpg');
                 // await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
                 I.track({
