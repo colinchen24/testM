@@ -30,7 +30,8 @@ Scenario('monitor nike', async function(I) {
             if (await I.grabCurrentUrl() === list[k].url) {
                 console.log('url is the same with last one.');
             } else {
-                I.clearCookie();
+                await I.clearCookie();
+                I.wait(2)
                 I.amOnPage(list[k].url);
                 I.wait(sleeptime);
             }
