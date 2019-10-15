@@ -28,7 +28,7 @@ exports.config = {
   
     //"tests": "./test/" + String(process.profile).split("|")[0],
     "tests": process.profile,
-    "timeout": 600000,
+    "timeout": 900000,
     "output": "./output",
     "include": {
     },
@@ -45,8 +45,8 @@ exports.config = {
             "restart": false,
             "keepBrowserState": false,
             "keepCookies": false,
-            "waitForTimeout": 10000,
-            "smartWait": 100,
+            "waitForTimeout": 30000,
+            "smartWait": 1000,
             // "host": host,
             // "port": port,
             // "seleniumAddress": host +":"+ port,
