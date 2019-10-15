@@ -35,7 +35,7 @@ Scenario('monitor nike', async function(I) {
                 I.wait(sleeptime);
             }
 
-            var availiabled = = await I.executeScript(function(size) {
+            var availiabled = await I.executeScript(function(size) {
                 if(!document) {
                     return false
                 } else if (size === 'outOfStock') {
