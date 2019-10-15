@@ -6,14 +6,14 @@ Scenario('monitor nike', async function(I) {
 
     // console.log(process.env.TIME)
 
-    var sleeptime=60;
+    var sleeptime=120;
 
     switch (process.env.TIME){
         case "sh":
-            sleeptime=8;
+            sleeptime=30;
             break;
         case "h":
-            sleeptime=30;
+            sleeptime=60;
             break;
     }
 
@@ -39,7 +39,7 @@ Scenario('monitor nike', async function(I) {
                 if(!document) {
                     return false
                 } else if (size === 'outOfStock') {
-                    if (document.getElementById('RightRail').innerText.indexOf('售罄') === -1) {
+                    if (document && document.getElementById('RightRail') && document.getElementById('RightRail').innerText.indexOf('售罄') === -1) {
                         return true;
                     }
                 } 
