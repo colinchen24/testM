@@ -41,6 +41,13 @@ Scenario('monitor nike', async function(I) {
             }
 
             var availiabled = await I.executeScript(function(size) {
+                if(!"".replaceAll){
+                    String.prototype.replaceAll = function(search, replacement) {
+                        var target = this;
+                        return target.replace(new RegExp(search, 'g'), replacement);
+                    };
+                }
+                
                 if(!document) {
                     return false
                 } else if (size === 'outOfStock') {
@@ -48,7 +55,8 @@ Scenario('monitor nike', async function(I) {
                         return true;
                     }
                 } 
-                else if (document.getElementsByClassName('exp-gridwall-header-titles')[0] && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (') !== -1 && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (' + size) === -1){
+                else if (document.getElementsByClassName('exp-gridwall-header-titles')[0] && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (') !== -1 
+                        && document.getElementsByClassName('grid-item-box') && document.getElementsByClassName('grid-item-box')[0] && document.getElementsByClassName('grid-item-box')[0].innerText.replaceAll('\g','').indexOf(size) !== -1){
                     return true;
                 } 
                 else {
