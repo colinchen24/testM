@@ -25,9 +25,7 @@ Scenario('monitor nike', async function(I) {
 
     list = JSON.parse(list);
 
-    for (var k = 0; k < list.length; k++) {
-
-        k = Math.floor(Math.random() * list.length);
+    for (var k = Math.floor(Math.random() * list.length); k < list.length; k++) {
 
         try {
             if (await I.grabCurrentUrl() === list[k].url) {
