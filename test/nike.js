@@ -26,6 +26,9 @@ Scenario('monitor nike', async function(I) {
     list = JSON.parse(list);
 
     for (var k = 0; k < list.length; k++) {
+
+        k = Math.floor(Math.random() * list.length);
+
         try {
             if (await I.grabCurrentUrl() === list[k].url) {
                 console.log('url is the same with last one.');
@@ -33,7 +36,7 @@ Scenario('monitor nike', async function(I) {
                 await I.clearCookie();
                 I.wait(2)
                 I.amOnPage(list[k].url);
-                I.saveScreenshot('result.jpg');
+                // I.saveScreenshot('result.jpg');
                 I.wait(sleeptime);
             }
 
