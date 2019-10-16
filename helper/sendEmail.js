@@ -25,7 +25,12 @@ class sendEmail extends Helper{
           body: JSON.stringify(body)
         }, function(error, response, body){
           // console.log(response.body)
-          return defer.resolve(response.body);
+          if(!response){
+            return defer.resolve([]);  
+          }else{
+            return defer.resolve(response.body);  
+          }
+          
       });
       return defer.promise;
     }
@@ -40,7 +45,11 @@ class sendEmail extends Helper{
           body: JSON.stringify(data)
         }, function(error, response, body){
           // console.log(response.body)
-          return defer.resolve(response.body);
+          if(!response){
+            return defer.resolve([]);  
+          }else{
+            return defer.resolve(response.body);  
+          }
       });
       return defer.promise;
     }
