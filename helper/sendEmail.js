@@ -8,7 +8,7 @@ class sendEmail extends Helper{
           headers: {
             'Content-Type': 'application/json'
           },
-          url:  'http://104.225.156.192:2222/test/sendEmail',
+          url:  'http://176.122.147.10:2222/test/sendEmail',
           body: JSON.stringify(postdata)
         }, function(error, response, body){
           console.log(body)
@@ -21,7 +21,7 @@ class sendEmail extends Helper{
           headers: {
             'Content-Type': 'application/json'
           },
-          url:  'http://104.225.156.192:2222/test/getmonitor',
+          url:  'http://176.122.147.10:2222/test/getmonitor',
           body: JSON.stringify(body)
         }, function(error, response, body){
           // console.log(response.body)
@@ -36,7 +36,7 @@ class sendEmail extends Helper{
           headers: {
             'Content-Type': 'application/json'
           },
-          url:  'http://104.225.156.192:2222/test/track',
+          url:  'http://176.122.147.10:2222/test/track',
           body: JSON.stringify(data)
         }, function(error, response, body){
           // console.log(response.body)
