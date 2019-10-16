@@ -6,14 +6,14 @@ Scenario('monitor nike', async function(I) {
 
     // console.log(process.env.TIME)
 
-    var sleeptime=120;
+    var sleeptime=60;
 
     switch (process.env.TIME){
         case "sh":
-            sleeptime=10;
+            sleeptime=5;
             break;
         case "h":
-            sleeptime=60;
+            sleeptime=30;
             break;
     }
 
