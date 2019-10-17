@@ -48,7 +48,10 @@ Scenario('monitor nike', async function(I) {
                 
                 if(!document) {
                     return false
-                } else if (size === 'outOfStock') {
+                } else if(I.grabCurrentUrl() !== list[k].url){
+                    return false;
+                }
+                else if (size === 'outOfStock') {
                     if (document && document.getElementById('RightRail') && document.getElementById('RightRail').innerText && document.getElementById('RightRail').innerText !== "" && document.getElementById('RightRail').innerText.indexOf('售罄') === -1) {
                         return true;
                     }
