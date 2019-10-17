@@ -45,10 +45,14 @@ Scenario('monitor nike', async function(I) {
                         return target.replace(new RegExp(search, 'g'), replacement);
                     };
                 }
+
+                console.log(window.location.href);
+                console.log(url);
                 
                 if(!document) {
                     return false
                 } else if(window.location.href !== url){
+                    console.log('url changed')
                     return false;
                 }
                 else if (size === 'outOfStock') {
