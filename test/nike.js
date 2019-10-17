@@ -38,7 +38,7 @@ Scenario('monitor nike', async function(I) {
                 I.wait(sleeptime);
             }
 
-            var availiabled = await I.executeScript(function(size) {
+            var availiabled = await I.executeScript(function(size, url) {
                 if(!"".replaceAll){
                     String.prototype.replaceAll = function(search, replacement) {
                         var target = this;
@@ -48,7 +48,7 @@ Scenario('monitor nike', async function(I) {
                 
                 if(!document) {
                     return false
-                } else if(window.location.href !== list[k].url){
+                } else if(window.location.href !== url){
                     return false;
                 }
                 else if (size === 'outOfStock') {
@@ -68,7 +68,7 @@ Scenario('monitor nike', async function(I) {
                     }
                 }
                 return false;
-                 }, list[k].size);
+                 }, list[k].size, list[k].url);
 
             now = dateFormat(new Date(), "isoDateTime");
 
