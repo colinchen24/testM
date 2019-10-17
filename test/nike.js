@@ -61,7 +61,10 @@ Scenario('monitor nike', async function(I) {
                     }
                 } 
                 else if (document.getElementsByClassName('exp-gridwall-header-titles')[0] && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (') !== -1 
-                        && document.getElementsByClassName('grid-item-box') && document.getElementsByClassName('grid-item-box')[0] && document.getElementsByClassName('grid-item-box')[0].innerText.replaceAll('\n','').indexOf(size) !== -1){
+                        && document.getElementsByClassName('grid-item-box') && document.getElementsByClassName('grid-item-box')[0] 
+                        && (size.split('&').length ===3) 
+                        && (document.getElementsByClassName('grid-item-box')[0].innerText.replaceAll('\n','').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('grid-item-box')[1].innerText.replaceAll('\n','').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('grid-item-box')[2].innerText.replaceAll('\n','').indexOf(size.split('&')[2]) === -1)
+                        ){
                     return true;
                 } 
                 else {
