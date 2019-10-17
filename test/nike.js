@@ -10,7 +10,7 @@ Scenario('monitor nike', async function(I) {
 
     switch (process.env.TIME){
         case "sh":
-            sleeptime=1;
+            sleeptime=3;
             break;
         case "h":
             sleeptime=30;
