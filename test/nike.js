@@ -48,7 +48,7 @@ Scenario('monitor nike', async function(I) {
                 
                 if(!document) {
                     return false
-                } else if(I.grabCurrentUrl() !== list[k].url){
+                } else if(window.location.href !== list[k].url){
                     return false;
                 }
                 else if (size === 'outOfStock') {
