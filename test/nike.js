@@ -10,7 +10,7 @@ Scenario('monitor nike', async function(I) {
 
     switch (process.env.TIME){
         case "sh":
-            sleeptime=3;
+            sleeptime=1;
             break;
         case "h":
             sleeptime=30;
@@ -57,7 +57,7 @@ Scenario('monitor nike', async function(I) {
                     }
                 } 
                 else if (document.getElementsByClassName('exp-gridwall-header-titles')[0] && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (') !== -1 
-                        && document.getElementsByClassName('grid-item-box') && document.getElementsByClassName('grid-item-box')[0] && document.getElementsByClassName('grid-item-box')[0].innerText.replaceAll('\g','').indexOf(size) !== -1){
+                        && document.getElementsByClassName('grid-item-box') && document.getElementsByClassName('grid-item-box')[0] && document.getElementsByClassName('grid-item-box')[0].innerText.replaceAll('\n','').indexOf(size) !== -1){
                     return true;
                 } 
                 else {
