@@ -10,7 +10,7 @@ Scenario('monitor nike', async function(I) {
 
     switch (process.env.TIME){
         case "sh":
-            sleeptime=3;
+            sleeptime=2;
             break;
         case "h":
             sleeptime=30;
@@ -24,11 +24,14 @@ Scenario('monitor nike', async function(I) {
     var now = dateFormat(new Date(), "isoDateTime");
 
     list = JSON.parse(list);
+    var randomK = Math.floor(Math.random() * (list.length - 2));
 
-    for (var k = Math.floor(Math.random() * list.length); k < list.length; k++) {
+    await I.amOnPage(list[randomK].url);
+
+    for (var k = randomK + 1; k < list.length; k++) {
 
         try {
-            if (await I.grabCurrentUrl() === list[k].url) {
+            if (k !== 0 && (list[k-1].url === list[k].url)){
                 console.log('url is the same with last one.');
             } else {
                 await I.clearCookie();
@@ -46,9 +49,6 @@ Scenario('monitor nike', async function(I) {
                     };
                 }
 
-                console.log(window.location.href);
-                console.log(url);
-                
                 if(!document) {
                     return false
                 } else if(window.location.href !== url){
@@ -69,7 +69,7 @@ Scenario('monitor nike', async function(I) {
                 } 
                 else {
                     for (var i = 0; i < document.getElementsByName('skuAndSize').length; i++) {
-                        if (document.getElementsByName('skuAndSize')[i].getAttribute('aria-label') === size && document.getElementsByName('skuAndSize')[i].getAttribute('disabled') != "") {
+                        if ((document.getElementsByName('skuAndSize')[i].getAttribute('aria-label') === size || document.getElementsByName('skuAndSize')[i].getAttribute('aria-label') === 'EU ' + size) && document.getElementsByName('skuAndSize')[i].getAttribute('disabled') != "") {
                             return true;
                         }
                     }
@@ -80,8 +80,7 @@ Scenario('monitor nike', async function(I) {
             now = dateFormat(new Date(), "isoDateTime");
 
             if (availiabled) {
-                // I.saveScreenshot('result.jpg');
-                // await I.sendEmail('colin.chen@ehealth.com', 'ready for shopping: ' + list[k].url + " size: " + list[k].size);
+
                 I.track({
                     "url": list[k].url,
                     "size": list[k].size,
@@ -98,6 +97,7 @@ Scenario('monitor nike', async function(I) {
             }
             //forever running
             if(k === list.length-1){
+                list = await I.MonitorList({"frequency": process.env.TIME});
                 k = 0;
             }
         } catch (err) {
