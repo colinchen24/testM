@@ -21,20 +21,27 @@ Scenario('monitor nike', async function(I) {
 
     var list = await I.MonitorList({"frequency": process.env.TIME});
 
+    var samesizes = [];
+    var isSameUrl = false;
+
     var now = dateFormat(new Date(), "isoDateTime");
 
     list = JSON.parse(list);
-    var randomK = Math.floor(Math.random() * (list.length - 2));
 
-    await I.amOnPage(list[randomK].url);
-
-    for (var k = randomK + 1; k < list.length; k++) {
+    for (var k = 0; k < list.length; k++) {
 
         try {
             if (k !== 0 && (list[k-1].url === list[k].url)){
                 console.log('url is the same with last one.');
+                isSameUrl = true;
             } else {
+                console.log(samesizes);
+                if(k !==0 ){
+                    I.track(samesizes);    
+                }
                 await I.clearCookie();
+                isSameUrl = false;
+                samesizes = [];
                 // I.wait(2)
                 I.amOnPage(list[k].url);
                 // I.saveScreenshot('result.jpg');
@@ -81,14 +88,15 @@ Scenario('monitor nike', async function(I) {
 
             if (availiabled) {
 
-                I.track({
+                samesizes.push({
                     "url": list[k].url,
                     "size": list[k].size,
                     "status": 'enabled',
                     "time": now
                 })
+
             } else {
-                I.track({
+                samesizes.push({
                     "url": list[k].url,
                     "size": list[k].size,
                     "status": 'disabled',
