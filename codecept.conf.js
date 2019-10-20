@@ -63,8 +63,8 @@ exports.config = {
                 "chromeOptions": chromeOptions,
                 "proxy": {
                   "proxyType": "manual",
-                  "httpProxy": '176.122.147.10:8085'
-                  // "noProxy": "127.0.0.1,localhost"
+                  "httpProxy": '176.122.147.10:8085',
+                  "noProxy": "collector-px0dqvu288.perimeterx.net,analytics.justuno.com,www.youtube.com,ws.sessioncam.com,static.ads-twitter.com,s.pinimg.com,integrate.thrive.today"
                 }
               }
         }
