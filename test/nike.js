@@ -45,7 +45,7 @@ Scenario('monitor nike', async function(I) {
                 // I.wait(2)
                 await I.amOnPage(list[k].url);
                 // I.saveScreenshot('result.jpg');
-                // I.wait(sleeptime);
+                I.wait(sleeptime);
             }
 
             var availiabled = await I.executeScript(function(size, url) {
