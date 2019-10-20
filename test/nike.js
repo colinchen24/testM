@@ -73,7 +73,11 @@ Scenario('monitor nike', async function(I) {
                         && (document.getElementsByClassName('grid-item-box')[0].innerText.replaceAll('\n','').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('grid-item-box')[1].innerText.replaceAll('\n','').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('grid-item-box')[2].innerText.replaceAll('\n','').indexOf(size.split('&')[2]) === -1)
                         ){
                     return true;
-                } 
+                } else if(url ==='https://www.nike.com/cn/w/new-shoes-3n82yzy7ok?sort=newest' && 
+                    (document.getElementsByClassName('product-card__body')[0].innerText.replaceAll('\n','').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('product-card__body')[1].innerText.replaceAll('\n','').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('product-card__body')[2].innerText.replaceAll('\n','').indexOf(size.split('&')[2]) === -1)
+                    ){
+                    return true;
+                }
                 else {
                     for (var i = 0; i < document.getElementsByName('skuAndSize').length; i++) {
                         if ((document.getElementsByName('skuAndSize')[i].getAttribute('aria-label') === size || document.getElementsByName('skuAndSize')[i].getAttribute('aria-label') === 'EU ' + size) && document.getElementsByName('skuAndSize')[i].getAttribute('disabled') != "") {
