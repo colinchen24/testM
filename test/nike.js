@@ -10,7 +10,7 @@ Scenario('monitor nike', async function(I) {
 
     switch (process.env.TIME){
         case "sh":
-            sleeptime=3;
+            sleeptime=1;
             break;
         case "h":
             sleeptime=30;
@@ -37,7 +37,7 @@ Scenario('monitor nike', async function(I) {
             } else {
                 console.log('save track: ' + list[k].url);
                 if(k !==0 ){
-                    I.track(samesizes);    
+                    await I.track(samesizes);    
                 }
                 await I.clearCookie();
                 isSameUrl = false;
