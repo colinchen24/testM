@@ -34,9 +34,8 @@ Scenario('monitor nike', async function(I) {
 
     var now = dateFormat(new Date(), "isoDateTime");
 
-    I.amOnPage('https://www.eastbay.com/product/nike-pg-3-mens/2607005.html');
-    
-    
-
+    I.amOnPage('https://www.eastbay.com/product/nike-pg-3-mens/2607005.html');  
+    let postHTML = await I.grabHTMLFrom('.c-form-field');
+    console.log(postHTML)
 
 });
