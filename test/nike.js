@@ -35,7 +35,7 @@ Scenario('monitor nike', async function(I) {
                 console.log('url is the same with last one.');
                 isSameUrl = true;
             } else {
-                console.log(samesizes);
+                console.log('save track: ' + list[k].url);
                 if(k !==0 ){
                     I.track(samesizes);    
                 }
@@ -43,9 +43,9 @@ Scenario('monitor nike', async function(I) {
                 isSameUrl = false;
                 samesizes = [];
                 // I.wait(2)
-                I.amOnPage(list[k].url);
+                await I.amOnPage(list[k].url);
                 // I.saveScreenshot('result.jpg');
-                I.wait(sleeptime);
+                // I.wait(sleeptime);
             }
 
             var availiabled = await I.executeScript(function(size, url) {
@@ -110,14 +110,7 @@ Scenario('monitor nike', async function(I) {
                 k = 0;
             }
         } catch (err) {
-            now = dateFormat(new Date(), "isoDateTime");
             console.log(err)
-            I.track({
-                "url": list[k].url,
-                "size": list[k].size,
-                "status": 'error',
-                "time": now
-            })
         }
 
 
