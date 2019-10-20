@@ -3,7 +3,7 @@ var host = config.get('host');
 var port = config.get('port');
 var chromeOptions = {
     "useAutomationExtension": false,
-    "args": ["--window-size=1800,1600","--no-sandbox","--headless","--disable-dev-shm-usage"]
+    "args": ["--window-size=1800,1600","--no-sandbox","--headless","--disable-dev-shm-usage", "--disable-gpu", "--blink-settings=imagesEnabled=false"]
     // "args": ["--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_1_1 like Mac OS X) AppleWebKit/602.2.14 (KHTML, like Gecko)","--window-size=375,812"]
 };
 
