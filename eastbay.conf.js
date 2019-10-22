@@ -50,9 +50,9 @@ exports.config = {
             // "host": host,
             // "port": port,
             // "seleniumAddress": host +":"+ port,
-            //"host": '10.8.77.14',
-            //"port": '4445',
-            //"seleniumAddress": '10.8.77.14' +":"+ '4445',
+            //"host": '104.225.156.192',
+            //"port": '4444',
+            //"seleniumAddress": '104.225.156.192' +":"+ '4444',
             "desiredCapabilities": {
                 "browserName": "chrome",
                // "version":"77.0",
