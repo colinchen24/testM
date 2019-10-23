@@ -80,15 +80,15 @@ var q = require('q');
       // await page.clearCookie();
       // console.log(list[k].url)
       await sleep(1000);
-      
+
       if(k !== 0){
         await browser.close();
       }
       
-      await sleep(1000);
+      await sleep(2000);
       var browser = await puppeteer.launch({
         headless: false,
-        args: ["--window-size=1800,1600", '--proxy-server="http=176.122.147.10:8085"']
+        args: ['--proxy-server="http=176.122.147.10:8085"']
       });
       var page = await browser.newPage();
       await page.setRequestInterception(true);
