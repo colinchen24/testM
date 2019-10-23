@@ -72,7 +72,6 @@ var q = require('q');
   console.log(list);
 
   for (var k = 0; k < list.length; k++) {
-
     if (k === 0 || list[k].url !== list[k - 1].url) {
       if (samesizes && JSON.stringify(samesizes).indexOf('enabled') !== -1) {
         // console.log(samesizes);
@@ -136,6 +135,8 @@ var q = require('q');
       })
     }
     //forever running
+    Math.floor(Math.random()*list.length);
+    
     if (k === list.length - 1) {
       var list = await MonitorList({
         "frequency": "eb"
