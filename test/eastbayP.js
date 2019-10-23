@@ -91,7 +91,9 @@ var q = require('q');
         headless: false,
         args: ['--proxy-server="http=176.122.147.10:8085"']
       });
+      await sleep(2000);
       var page = await browser.newPage();
+      await sleep(2000);
       await page.setRequestInterception(true);
       page.on('request', interceptedRequest => {
         if (interceptedRequest.url().indexOf('www.eastbay.com') === -1 || interceptedRequest.url().indexOf('https://www.eastbay.com/built/29/') !== -1) {
@@ -136,7 +138,7 @@ var q = require('q');
     }
     //forever running
     Math.floor(Math.random()*list.length);
-    
+
     if (k === list.length - 1) {
       var list = await MonitorList({
         "frequency": "eb"
