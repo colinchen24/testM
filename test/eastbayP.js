@@ -104,7 +104,9 @@ var q = require('q');
         }
       });
 
-      await page.goto(list[k].url);
+      await page.goto(list[k].url,{
+        timeout: 60000
+      });
       await sleep(1000);
       
       postHTML = await page.$eval('.ProductDetails-form__info', ele => ele.innerHTML);
