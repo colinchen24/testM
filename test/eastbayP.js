@@ -1,11 +1,11 @@
 const puppeteer = require('puppeteer');
  
 (async () => {
-  const browser = await puppeteer.launch({headless:false});
+  const browser = await puppeteer.launch({headless:true});
   const page = await browser.newPage();
   await page.setRequestInterception(true);
   page.on('request', interceptedRequest => {
-    if (interceptedRequest.url().indexOf('www.eastbay.com') === -1){
+    if (interceptedRequest.url().indexOf('www.eastbay.com') === -1 || interceptedRequest.url().indexOf('https://www.eastbay.com/built/29/') !== -1){
     	console.log(interceptedRequest.url())
       interceptedRequest.abort();
     }
