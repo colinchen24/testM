@@ -62,18 +62,20 @@ var q = require('q');
   };
 
 
-  // console.log('xx');
+  console.log('xx');
   // await page.goto('https://www.eastbay.com/product/nike-pg-3-mens/2607005.html');
   var list = await MonitorList({
     "frequency": "eb"
   });
   list = JSON.parse(list);
 
+  console.log(list);
+
   for (var k = 0; k < list.length; k++) {
 
     if (k === 0 || list[k].url !== list[k - 1].url) {
       if (samesizes && JSON.stringify(samesizes).indexOf('enabled') !== -1) {
-        console.log(samesizes);
+        // console.log(samesizes);
         await track(samesizes);
         var samesizes = [];
       }
@@ -85,7 +87,7 @@ var q = require('q');
         await browser.close();
       }
       
-      await sleep(2000);
+      await sleep(1000);
       var browser = await puppeteer.launch({
         headless: false,
         args: ['--proxy-server="http=176.122.147.10:8085"']
@@ -134,7 +136,7 @@ var q = require('q');
     //forever running
     if (k === list.length - 1) {
       var list = await MonitorList({
-        "frequency": process.env.TIME
+        "frequency": "eb"
       });
       list = JSON.parse(list);
       k = 0;
