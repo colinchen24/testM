@@ -115,22 +115,27 @@ var q = require('q');
 
       await sleep(1000);
       
-      postHTML = await page.$eval('#ProductDetails', ele => ele.innerHTML);
-      message = await page.$eval('#main', ele => ele.innerHTML);
+      // postHTML = await page.$eval('#ProductDetails', ele => ele.innerHTML);
+      postHTML = await page.$eval('#main', ele => ele.innerHTML);
       postHTML = postHTML.toString();
-      message = message.toString();
+      // message = message.toString();
       // console.log(postHTML);
     }
     
     await sleep(1000);
     console.log(list[k].url)
 
-    if (list[k].size !== '' && postHTML.toString().indexOf('Size ' + list[k].size + ', out of stock') === -1) {
-      // console.log('size out of stack not shown');
+    if (list[k].size !== '' && postHTML.toString().indexOf('Size ' + list[k].size + ', out of stock') === -1 
+      && postHTML.toString().indexOf('The product you are trying to view is no longer available') === -1) {
+      console.log('size out of stack not shown');
       availiabled = true;
-    } else if( (list[k].discount !=='' && message.toString().indexOf('Excluded from discount') === -1) 
-      || (list[k].price !== '' && postHTML.toString().split('">$')[1].split('<')[0] !== list[k].price) ){
-      // console.log((list[k].discount !=='' && message.toString().indexOf('Excluded from discount') === -1) )
+    } else if( (list[k].discount !=='' &&
+      postHTML.toString().indexOf('The product you are trying to view is no longer available') === -1
+      && postHTML.toString().indexOf('Excluded from discount') === -1) 
+      || (list[k].price !== '' 
+        && postHTML.toString().indexOf('The product you are trying to view is no longer available') === -1
+        && postHTML.toString().split('">$')[1].split('<')[0] !== list[k].price) ){
+      // console.log((list[k].discount !=='' && postHTML.toString().indexOf('Excluded from discount') === -1) )
 
       console.log('discount or price is changed');
       // console.log((list[k].price !== '' && postHTML.toString().split('">$')[1].split('</span>')[0] !== list[k].price))
