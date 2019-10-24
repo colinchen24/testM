@@ -122,8 +122,7 @@ var q = require('q');
     if (postHTML.toString().indexOf('Size ' + list[k].size + ', out of stock') === -1) {
       console.log('size out of stack not shown');
       availiabled = true;
-    } 
-    if( (list[k].discount !=='' && postHTML.toString().indexOf('Excluded from discount') === -1) 
+    } else if( (list[k].discount !=='' && postHTML.toString().indexOf('Excluded from discount') === -1) 
       || postHTML.toString().split('">$')[1].split('</span>')[0] !== list[k].price ){
       console.log('discount or price is changed');
       availiabled = true;
