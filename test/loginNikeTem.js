@@ -24,11 +24,10 @@ Scenario('monitor nike', async function(I) {
     console.log(list)
 
     var samesizes = [];
-    
+    var isSameUrl = false;
     var availiabled = false;
     var urlindex = 0;
     var logintime = 0;
-    var firstRun = true;
 
     var now = dateFormat(new Date(), "isoDateTime");
     
@@ -37,42 +36,49 @@ Scenario('monitor nike', async function(I) {
         // var k =0;
 
         try {
-            if ((k === 0 && (firstRun || list[k].email !== list[list.length -1].emai)) || (k !==0 && list[k-1].email !== list[k].email)){                
-                await I.clearCookie();
-                await I.amOnPage('https://www.nike.com/cn/login'); 
-                I.wait(5);
-                var login = await I.executeScript(function(email, pw) {
-                    document.getElementsByClassName("nike-unite-component action-link mobileNumberToEmailLoginLink toggle-action-link")[0].firstElementChild.click();
-                    document.getElementsByName('emailAddress')[0].value = email;
-                    document.getElementsByName('password')[0].value = pw;
-                    document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component")[0].firstElementChild.click();
-                    setTimeout(function(){ 
-                        if(document.getElementsByClassName("nike-unite-error-close")){
-                            document.getElementsByClassName("nike-unite-error-close")[0].firstElementChild.click()
-                            document.getElementsByName('emailAddress')[0].value = email;
-                            document.getElementsByName('password')[0].value = pw;
-                            document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component")[0].firstElementChild.click();
-                        }     
-                    }, 6000);
-                    return true;        
-                }, list[k].email, 'Pzz1990.');   
+            if (k !== 0 && (list[k-1].url === list[k].url)){
+                console.log('url is the same with last one.');
+                isSameUrl = true;
+            } else {
+                console.log('save track: ' + list[k].url);
+                if(k !==0 ) {
+                    console.log(samesizes);
+                    // await I.track(samesizes);  
+                }
+                isSameUrl = false;
+                samesizes = [];
+                // I.wait(2)
+                if( logintime === 0 || logintime > 1000){
+                    if(logintime > 1000){
+                        logintime = 0;
+                    }
+                    await I.clearCookie();
+                    await I.amOnPage('https://www.nike.com/cn/login'); 
+                    I.wait(5);
+                    var login = await I.executeScript(function(email, pw) {
+                        document.getElementsByClassName("nike-unite-component action-link mobileNumberToEmailLoginLink toggle-action-link")[0].firstElementChild.click();
+                        document.getElementsByName('emailAddress')[0].value = email;
+                        document.getElementsByName('password')[0].value = pw;
+                        document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component")[0].firstElementChild.click();
+                        setTimeout(function(){ 
+                            if(document.getElementsByClassName("nike-unite-error-close")){
+                                document.getElementsByClassName("nike-unite-error-close")[0].firstElementChild.click()
+                                document.getElementsByName('emailAddress')[0].value = email;
+                                document.getElementsByName('password')[0].value = pw;
+                                document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component")[0].firstElementChild.click();
+                            }     
+                        }, 6000);
+                        return true;
+        
+                    }, list[k].email, 'Pzz1990.');   
+                }
                 
                 // I.saveScreenshot('result.jpg');
                 I.wait(sleeptime);
-            } 
-
-            if(k !== 0 && list[k-1].url !== list[k].url) {
-                console.log(samesizes);
-                await I.track(samesizes);  
-                
-            } else if(!firstRun){
-                console.log(samesizes);
-                await I.track(samesizes); 
             }
+
  
             I.wait(2);
-            firstRun = false;
-            samesizes = [];
             // I.saveScreenshot('result1.jpg');
             await I.amOnPage('https://www.nike.com/cn/favorites');
             I.wait(sleeptime);
@@ -98,7 +104,7 @@ Scenario('monitor nike', async function(I) {
                 return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;
             }, urlindex);
 
-            I.wait(3);
+            I.wait(10);
 
             switch(buttoncontext){
                 case "已售罄":
