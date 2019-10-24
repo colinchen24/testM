@@ -72,7 +72,11 @@ var q = require('q');
   for (var k = 0; k < list.length; k++) {
 
     if (k === 0 || list[k].url !== list[k - 1].url) {
-
+      
+      if(list.length > 15){
+        k = Math.floor(Math.random()*list.length);  
+      }
+      
       if (samesizes && JSON.stringify(samesizes).indexOf('enabled') !== -1) {
         console.log(samesizes);
         await track(samesizes);
