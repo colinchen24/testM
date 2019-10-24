@@ -16,7 +16,7 @@ var q = require('q');
       headers: {
         'Content-Type': 'application/json'
       },
-      url: 'http://176.122.147.10:2222/test/getmonitor',
+      url: 'http://127.0.0.1:2222/test/getmonitor',
       body: JSON.stringify(body)
     }, function(error, response, body) {
       // console.log(response.body)
@@ -48,7 +48,7 @@ var q = require('q');
       headers: {
         'Content-Type': 'application/json'
       },
-      url: 'http://176.122.147.10:2222/test/track',
+      url: 'http://127.0.0.1:2222/test/track',
       body: JSON.stringify(data)
     }, function(error, response, body) {
       // console.log(response.body)
@@ -69,12 +69,14 @@ var q = require('q');
   });
   list = JSON.parse(list);
 
-  console.log(list);
+  // console.log(list);
 
   for (var k = 0; k < list.length; k++) {
+
     if (k === 0 || list[k].url !== list[k - 1].url) {
+
       if (samesizes && JSON.stringify(samesizes).indexOf('enabled') !== -1) {
-        // console.log(samesizes);
+        console.log(samesizes);
         await track(samesizes);
         var samesizes = [];
       }
@@ -89,7 +91,7 @@ var q = require('q');
       await sleep(1000);
       var browser = await puppeteer.launch({
         headless: false,
-        args: ['--proxy-server="http=176.122.147.10:8085"']
+        args: ['--proxy-server="http=127.0.0.1:8085"']
       });
       await sleep(2000);
       var page = await browser.newPage();
@@ -110,34 +112,42 @@ var q = require('q');
       });
       await sleep(1000);
       
-      postHTML = await page.$eval('.ProductDetails-form__info', ele => ele.innerHTML);
+      postHTML = await page.$eval('#ProductDetails', ele => ele.innerHTML);
       postHTML = postHTML.toString();
-      // console.log(postHTML);
+      console.log(postHTML);
     }
+    
+    await sleep(1000);
 
     if (postHTML.toString().indexOf('Size ' + list[k].size + ', out of stock') === -1) {
       availiabled = true;
     } else {
       availiabled = false;
     }
+
     now = dateFormat(new Date(), "isoDateTime");
-    if (availiabled) {
+    if(postHTML.indexOf(list[k].url.split('/')[list[k].url.split('/').length -1 ].split(".")[0]) !== -1){
+      if (availiabled) {
       samesizes.push({
         "url": list[k].url,
         "size": list[k].size,
         "status": 'enabled',
         "time": now
-      })
-    } else {
-      samesizes.push({
-        "url": list[k].url,
-        "size": list[k].size,
-        "status": 'disabled',
-        "time": now
-      })
+        })
+      } else {
+        samesizes.push({
+          "url": list[k].url,
+          "size": list[k].size,
+          "status": 'disabled',
+          "time": now
+        })
+      }
+    } else{
+      console.log("missing match searching");
     }
+    
     //forever running
-    Math.floor(Math.random()*list.length);
+    // Math.floor(Math.random()*list.length);
 
     if (k === list.length - 1) {
       var list = await MonitorList({
