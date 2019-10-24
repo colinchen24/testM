@@ -16,7 +16,7 @@ var q = require('q');
       headers: {
         'Content-Type': 'application/json'
       },
-      url: 'http://127.0.0.1:2222/test/getmonitor',
+      url: 'http://176.122.147.10:2222/test/getmonitor',
       body: JSON.stringify(body)
     }, function(error, response, body) {
       // console.log(response.body)
@@ -48,7 +48,7 @@ var q = require('q');
       headers: {
         'Content-Type': 'application/json'
       },
-      url: 'http://127.0.0.1:2222/test/track',
+      url: 'http://176.122.147.10:2222/test/track',
       body: JSON.stringify(data)
     }, function(error, response, body) {
       // console.log(response.body)
@@ -89,7 +89,7 @@ var q = require('q');
       await sleep(1000);
       var browser = await puppeteer.launch({
         headless: false,
-        args: ['--proxy-server="http=127.0.0.1:8085"']
+        args: ['--proxy-server="http=176.122.147.10:8085"']
       });
       await sleep(2000);
       var page = await browser.newPage();
