@@ -72,7 +72,7 @@ var q = require('q');
   for (var k = 0; k < list.length; k++) {
 
     if (k === 0 || list[k].url !== list[k - 1].url) {
-      
+
       if(list.length > 15){
         k = Math.floor(Math.random()*list.length);  
       }
@@ -123,11 +123,11 @@ var q = require('q');
     await sleep(1000);
     console.log(list[k].url)
 
-    if (postHTML.toString().indexOf('Size ' + list[k].size + ', out of stock') === -1) {
+    if (list[k].size !== '' && postHTML.toString().indexOf('Size ' + list[k].size + ', out of stock') === -1) {
       console.log('size out of stack not shown');
       availiabled = true;
     } else if( (list[k].discount !=='' && postHTML.toString().indexOf('Excluded from discount') === -1) 
-      || postHTML.toString().split('">$')[1].split('</span>')[0] !== list[k].price ){
+      || (list[k].price !== '' && postHTML.toString().split('">$')[1].split('</span>')[0] !== list[k].price) ){
       console.log('discount or price is changed');
       availiabled = true;
     } else {
