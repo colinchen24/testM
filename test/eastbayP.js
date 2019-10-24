@@ -61,15 +61,13 @@ var q = require('q');
     return defer.promise;
   };
 
-
-  console.log('xx');
   // await page.goto('https://www.eastbay.com/product/nike-pg-3-mens/2607005.html');
   var list = await MonitorList({
     "frequency": "eb"
   });
   list = JSON.parse(list);
 
-  // console.log(list);
+  console.log(list);
 
   for (var k = 0; k < list.length; k++) {
 
@@ -110,23 +108,33 @@ var q = require('q');
       await page.goto(list[k].url,{
         timeout: 60000
       });
+
       await sleep(1000);
       
       postHTML = await page.$eval('#ProductDetails', ele => ele.innerHTML);
       postHTML = postHTML.toString();
-      console.log(postHTML);
+      // console.log(postHTML);
     }
     
     await sleep(1000);
+    console.log(list[k].url)
 
     if (postHTML.toString().indexOf('Size ' + list[k].size + ', out of stock') === -1) {
+      console.log('size out of stack not shown');
+      availiabled = true;
+    } 
+    if( (list[k].discount !=='' && postHTML.toString().indexOf('Excluded from discount') === -1) 
+      || postHTML.toString().split('">$')[1].split('</span>')[0] !== list[k].price ){
+      console.log('discount or price is changed');
       availiabled = true;
     } else {
+      console.log('availiabled false');
       availiabled = false;
     }
 
     now = dateFormat(new Date(), "isoDateTime");
     if(postHTML.indexOf(list[k].url.split('/')[list[k].url.split('/').length -1 ].split(".")[0]) !== -1){
+      
       if (availiabled) {
       samesizes.push({
         "url": list[k].url,
@@ -148,6 +156,8 @@ var q = require('q');
     
     //forever running
     // Math.floor(Math.random()*list.length);
+
+    // console.log(samesizes)
 
     if (k === list.length - 1) {
       var list = await MonitorList({
