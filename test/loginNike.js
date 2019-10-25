@@ -76,7 +76,7 @@ Scenario('monitor nike', async function(I) {
             // I.saveScreenshot('result1.jpg');
             await I.amOnPage('https://www.nike.com/cn/favorites');
             I.wait(sleeptime);
-            // I.saveScreenshot('result.jpg');
+            
             
             urlindex = await I.executeScript(function(url) {
                 var k = 0;
@@ -93,9 +93,10 @@ Scenario('monitor nike', async function(I) {
 
             I.wait(3);
             console.log("urlindex: " + urlindex);
+            I.saveScreenshot('result.jpg');
 
             var buttoncontext = await I.executeScript(function(num) {
-                if(document.getElementsByClassName('css-1isv87d e1ocvqf40')){
+                if(document.getElementsByClassName('css-1isv87d e1ocvqf40').length !== 0){
                     return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;    
                 } else{
                     return "not found"
