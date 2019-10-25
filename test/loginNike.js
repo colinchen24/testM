@@ -65,22 +65,25 @@ Scenario('monitor nike', async function(I) {
             if(k !== 0 && list[k-1].url !== list[k].url) {
                 console.log(samesizes);
                 await I.track(samesizes);  
+                samesizes = [];
                 
-            } else if(!firstRun){
+            } 
+            if(k===0 && !firstRun){
                 console.log(samesizes);
                 await I.track(samesizes); 
+                samesizes = [];
             }
  
             I.wait(2);
             firstRun = false;
-            samesizes = [];
+            
             // I.saveScreenshot('result1.jpg');
             await I.amOnPage('https://www.nike.com/cn/favorites');
             I.wait(sleeptime);
             
             
             urlindex = await I.executeScript(function(url) {
-                var k = 0;
+                var k = 999;
                 if(document.getElementsByClassName('ncss-col-sm-6 ncss-col-lg-4 product-card css-5qttql') && document.getElementsByClassName('ncss-col-sm-6 ncss-col-lg-4 product-card css-5qttql').length >0){
                     for(var i=0; i<document.getElementsByClassName('ncss-col-sm-6 ncss-col-lg-4 product-card css-5qttql').length; i++){
                         if (document.getElementsByClassName('ncss-col-sm-6 ncss-col-lg-4 product-card css-5qttql')[i].getAttribute("pdpurl").split('/')[document.getElementsByClassName('ncss-col-sm-6 ncss-col-lg-4 product-card css-5qttql')[i].getAttribute("pdpurl").split('/').length -1] === url.split('/')[url.split('/').length - 1]){
@@ -92,10 +95,14 @@ Scenario('monitor nike', async function(I) {
                 
             }, list[k].url);
 
-            I.wait(3);
+            I.wait(1);
             console.log("urlindex: " + urlindex);
             // I.saveScreenshot('result.jpg');
-
+            if(urlindex === 999){
+                console.log('url is not in account..')
+                return;
+            }
+            I.wait(2);
             var buttoncontext = await I.executeScript(function(num) {
                 if(document.getElementsByClassName('css-1isv87d e1ocvqf40').length !== 0){
                     return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;    
