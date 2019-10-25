@@ -91,12 +91,19 @@ Scenario('monitor nike', async function(I) {
                 
             }, list[k].url);
 
-            I.wait(1);
+            I.wait(3);
             console.log("urlindex: " + urlindex);
 
             var buttoncontext = await I.executeScript(function(num) {
-                return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;
+                if(document.getElementsByClassName('css-1isv87d e1ocvqf40')){
+                    return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;    
+                } else{
+                    return "not found"
+                }
+                
             }, urlindex);
+
+            console.log(buttoncontext);
 
             I.wait(3);
 
