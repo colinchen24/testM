@@ -59,7 +59,7 @@ Scenario('monitor nike', async function(I) {
                 
                 
                 I.wait(sleeptime);
-                I.saveScreenshot('result0.jpg');
+                // I.saveScreenshot('result0.jpg');
             } 
 
             if(k !== 0 && list[k-1].url !== list[k].url) {
@@ -94,7 +94,7 @@ Scenario('monitor nike', async function(I) {
 
             I.wait(3);
             console.log("urlindex: " + urlindex);
-            I.saveScreenshot('result.jpg');
+            // I.saveScreenshot('result.jpg');
 
             var buttoncontext = await I.executeScript(function(num) {
                 if(document.getElementsByClassName('css-1isv87d e1ocvqf40').length !== 0){
