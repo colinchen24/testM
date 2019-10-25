@@ -57,8 +57,9 @@ Scenario('monitor nike', async function(I) {
                     return true;        
                 }, list[k].email, 'Pzz1990.');   
                 
-                // I.saveScreenshot('result.jpg');
+                
                 I.wait(sleeptime);
+                I.saveScreenshot('result0.jpg');
             } 
 
             if(k !== 0 && list[k-1].url !== list[k].url) {
