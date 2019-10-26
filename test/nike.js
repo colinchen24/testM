@@ -25,7 +25,16 @@ Scenario('monitor nike', async function(I) {
     var samesizes = [];
     var isSameUrl = false;
 
-    var now = dateFormat(new Date(), "isoDateTime");
+    function getZoneTime(){
+        var localtime = new Date();  
+        var localmesc = localtime.getTime(); 
+        var localOffset = localtime.getTimezoneOffset() * 60000; 
+        var utc = localOffset + localmesc; 
+        var calctime = utc + (3600000*8);  
+        var nd = new Date(calctime);  
+        return nd.toDateString()+" "+nd.getHours()+":"+nd.getMinutes()+":"+nd.getSeconds(); 
+    }
+  var now = getZoneTime();
     
 
     for (var k = 0; k < list.length; k++) {
@@ -88,7 +97,7 @@ Scenario('monitor nike', async function(I) {
                 return false;
                  }, list[k].size, list[k].url);
 
-            now = dateFormat(new Date(), "isoDateTime");
+            now = getZoneTime();
 
             if (availiabled) {
 

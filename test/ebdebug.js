@@ -6,18 +6,7 @@ var q = require('q');
 (async () => {
   var availiabled = false;
   var postHTML = '';
-  function getZoneTime(){
-        var localtime = new Date();  
-        var localmesc = localtime.getTime(); 
-        var localOffset = localtime.getTimezoneOffset() * 60000; 
-        var utc = localOffset + localmesc; 
-        var calctime = utc + (3600000*8);  
-        var nd = new Date(calctime);  
-        return nd.toDateString()+" "+nd.getHours()+":"+nd.getMinutes()+":"+nd.getSeconds(); 
-    }
-  var now = getZoneTime();
-  // var now = dateFormat(new Date(), "isoDateTime");
-  // console.log(now);
+  var now = dateFormat(new Date(), "isoDateTime");
   var samesizes = [];
   var sleeptime = 3;
 
@@ -77,10 +66,35 @@ var q = require('q');
     "frequency": "eb"
   });
   list = JSON.parse(list);
+  list = [{
+        "_id": "5db232126148480b16de7497",
+        "discount": "yes",
+        "email": "",
+        "frequency": "eb",
+        "price": "91.00",
+        "size": "07.5",
+        "url": "https://www.eastbay.com/product/jordan-aj-1-low-mens/53558128.html",
+        "__v": 0,
+        "time": "2019-10-24T23:23:01.000Z",
+        "status": "enabled"
+    },{
+        "_id": "5db232126148480b16de7497",
+        "discount": "yes",
+        "email": "",
+        "frequency": "eb",
+        "price": "90.00",
+        "size": "07.5",
+        "url": "https://www.eastbay.com/product/jordan-aj-1-low-mens/53558128.html",
+        "__v": 0,
+        "time": "2019-10-24T23:23:01.000Z",
+        "status": "enabled"
+    }];
+
+    var k = 0;
 
   console.log(list);
 
-  for (var k = 0; k < list.length; k++) {
+  // for (var k = 0; k < list.length; k++) {
 
     if (k === 0 || list[k].url !== list[k - 1].url) {
 
@@ -90,7 +104,7 @@ var q = require('q');
       
       if (samesizes && JSON.stringify(samesizes).indexOf('enabled') !== -1) {
         console.log(samesizes);
-        await track(samesizes);
+        // await track(samesizes);
         var samesizes = [];
       }
       // await page.clearCookie();
@@ -130,7 +144,7 @@ var q = require('q');
       postHTML = await page.$eval('#main', ele => ele.innerHTML);
       postHTML = postHTML.toString();
       // message = message.toString();
-      // console.log(postHTML);
+      console.log(postHTML);
     }
     
     await sleep(1000);
@@ -146,17 +160,17 @@ var q = require('q');
       || (list[k].price !== '' 
         && postHTML.toString().indexOf('The product you are trying to view is no longer available') === -1
         && postHTML.toString().split('">$')[1].split('<')[0] !== list[k].price) ){
-      // console.log((list[k].discount !=='' && postHTML.toString().indexOf('Excluded from discount') === -1) )
+      console.log((list[k].discount !=='' && postHTML.toString().indexOf('Excluded from discount') === -1) )
 
       console.log('discount or price is changed');
-      // console.log((list[k].price !== '' && postHTML.toString().split('">$')[1].split('</span>')[0] !== list[k].price))
+      console.log((list[k].price !== '' && postHTML.toString().split('">$')[1].split('</span>')[0] !== list[k].price))
       availiabled = true;
     } else {
       console.log('availiabled false');
       availiabled = false;
     }
 
-    now = getZoneTime();
+    now = dateFormat(new Date(), "isoDateTime");
     if(postHTML.indexOf(list[k].url.split('/')[list[k].url.split('/').length -1 ].split(".")[0]) !== -1){
       
       if (availiabled) {
@@ -191,6 +205,6 @@ var q = require('q');
       k = 0;
     }
     // await browser.close();
-  }
+  // }
   // await browser.close();
 })();

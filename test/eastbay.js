@@ -2,7 +2,7 @@ Feature('just do it');
 
 var dateFormat = require('dateformat');
 
-Scenario('monitor nike', async function(I) {
+Scenario('monitor eastbay', async function(I) {
 
     // console.log(process.env.TIME)
 
@@ -24,7 +24,16 @@ Scenario('monitor nike', async function(I) {
 
     var availiabled = false;
     var postHTML = '';
-    var now = dateFormat(new Date(), "isoDateTime");
+    function getZoneTime(){
+        var localtime = new Date();  
+        var localmesc = localtime.getTime(); 
+        var localOffset = localtime.getTimezoneOffset() * 60000; 
+        var utc = localOffset + localmesc; 
+        var calctime = utc + (3600000*8);  
+        var nd = new Date(calctime);  
+        return nd.toDateString()+" "+nd.getHours()+":"+nd.getMinutes()+":"+nd.getSeconds(); 
+    }
+  var now = getZoneTime();
     var samesizes = [];
 
     for (var k = 0; k < list.length; k++) {
@@ -47,7 +56,7 @@ Scenario('monitor nike', async function(I) {
         } else {
             availiabled = false;
         }
-        now = dateFormat(new Date(), "isoDateTime");
+        now = getZoneTime();
         if (availiabled) {
             samesizes.push({
                 "url": list[k].url,
