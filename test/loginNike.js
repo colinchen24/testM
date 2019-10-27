@@ -173,7 +173,7 @@ Scenario('monitor nike', async function(I) {
                 logintime ++;
                 var list = await I.MonitorList({"frequency": process.env.TIME});
                 list = JSON.parse(list);
-                k = 0;
+                k = -1;
             }
         } catch (err) {
             console.log(err)
