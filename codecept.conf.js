@@ -50,9 +50,9 @@ exports.config = {
             // "host": host,
             // "port": port,
             // "seleniumAddress": host +":"+ port,
-            //"host": '10.8.77.14',
-            //"port": '4445',
-            //"seleniumAddress": '10.8.77.14' +":"+ '4445',
+            // "host": '106.54.185.25',
+            // "port": '4444',
+            // "seleniumAddress": '106.54.185.25' +":"+ '4444',
             "desiredCapabilities": {
                 "browserName": "chrome",
                // "version":"77.0",
@@ -64,7 +64,7 @@ exports.config = {
                 "proxy": {
                   "proxyType": "manual",
                   "httpProxy": '176.122.147.10:8085',
-                  "noProxy": "127.0.0.1"
+                  "noProxy": "127.0.0.1,176.122.147.10"
                 }
               }
         }

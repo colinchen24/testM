@@ -3,16 +3,12 @@ var host = config.get('host');
 var port = config.get('port');
 var chromeOptions = {
     "useAutomationExtension": false,
-    "args": ["--window-size=1800,1600","--no-sandbox","--disable-dev-shm-usage", "--disable-gpu", "--blink-settings=imagesEnabled=false"] //"--headless",
+    "args": ["--window-size=1800,1600","--headless","--no-sandbox","--disable-dev-shm-usage", "--disable-gpu", "--blink-settings=imagesEnabled=false"] //"--headless",
     // "args": ["--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_1_1 like Mac OS X) AppleWebKit/602.2.14 (KHTML, like Gecko)","--window-size=375,812"]
 };
 
-var user = "YQA31646966805444316"
-var password = "rdaPLnjjA2ADXUB6"
-var host = "dyn.horocn.com"
-var port = 50000
 
-var proxyUrl = "http://" + user + ":" + password + "@" + host + ":" + port;
+// var proxyUrl = "http://" + user + ":" + password + "@" + host + ":" + port;
 
 if(process.profile == 'Tracking/*.js'){
 // if(process.profile == 'Tracking/enrollmentTracking.js'){
@@ -50,21 +46,21 @@ exports.config = {
             // "host": host,
             // "port": port,
             // "seleniumAddress": host +":"+ port,
-            //"host": '104.225.156.192',
-            //"port": '4444',
-            //"seleniumAddress": '104.225.156.192' +":"+ '4444',
+            // "host": '106.54.185.25',
+            // "port": '4444',
+            // "seleniumAddress": '106.54.185.25' +":"+ '4444',
             "desiredCapabilities": {
                 "browserName": "chrome",
                // "version":"77.0",
-                "enableVNC":true,
-                "enableVideo":false,
+                // "enableVNC":true,
+                // "enableVideo":false,
                 "name":"Medicare XM E2E",
                 "build":"Medicare XM Team",
                 "chromeOptions": chromeOptions,
                 "proxy": {
                   "proxyType": "manual",
                   "httpProxy": '176.122.147.10:8085',
-                  "noProxy": "127.0.0.1"
+                  "noProxy": "127.0.0.1,176.122.147.10"
                 }
               }
         }
