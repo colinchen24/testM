@@ -21,7 +21,7 @@ Scenario('monitor nike', async function(I) {
 
     var list = await I.MonitorList({"frequency": process.env.TIME});
     list = JSON.parse(list);
-    console.log(list)
+    
     var slist
 
     for (var i=0;i<list.length;i++){
@@ -32,6 +32,9 @@ Scenario('monitor nike', async function(I) {
             slist.push(list[i]);    
         }
     }
+
+    list = slist;
+    console.log(list)
 
 
 
@@ -194,6 +197,7 @@ console.log(samesizes);
                         slist.push(list[i]);    
                     }
                 }
+                list = slist;
                 k = 0;
             }
         } catch (err) {
