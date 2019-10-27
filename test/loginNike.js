@@ -105,48 +105,48 @@ Scenario('monitor nike', async function(I) {
             }, list[k].url);
 
             I.wait(1);
+            availiabled = false;
             console.log("urlindex: " + urlindex);
             // I.saveScreenshot('result.jpg');
-            if(urlindex === 999){
-                console.log('url is not in account..')
-                // return;
-            }
             I.wait(2);
-            var buttoncontext = await I.executeScript(function(num) {
+            if(url !== 999){
+                var buttoncontext = await I.executeScript(function(num) {
                 if(document.getElementsByClassName('css-1isv87d e1ocvqf40').length !== 0){
                     return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;    
                 } else{
                     return "not found"
                 }
                 
-            }, urlindex);
-
-            console.log(buttoncontext);
-
-            I.wait(3);
-
-            switch(buttoncontext){
-                case "已售罄":
-                    availiabled = false;
-                case "加入购物车":
-                    availiabled = true;
-            }
-
-            if(buttoncontext === "选择尺码"){
-                var sizehtml = await I.executeScript(function(num) {
-                    document.getElementsByClassName('ncss-col-sm-12 css-1pzxakv wishlist-grid-actions')[num].firstElementChild.click();
-                    return document.getElementsByClassName('size-selector-wrapper e109n9an3 css-9be9yh')[0].innerHTML
                 }, urlindex);
-                
-                // console.log(sizehtml);
-                I.wait(1);
-
-                if (sizehtml.split('"'+ list[k].size + '"')[1].split('>'+ list[k].size + '<')[0].indexOf('disabled=""') === -1){
-                    availiabled = true
-                } else{
-                    availiabled = false
+    
+                console.log(buttoncontext);
+    
+                I.wait(3);
+    
+                switch(buttoncontext){
+                    case "已售罄":
+                        availiabled = false;
+                    case "加入购物车":
+                        availiabled = true;
+                }
+    
+                if(buttoncontext === "选择尺码"){
+                    var sizehtml = await I.executeScript(function(num) {
+                        document.getElementsByClassName('ncss-col-sm-12 css-1pzxakv wishlist-grid-actions')[num].firstElementChild.click();
+                        return document.getElementsByClassName('size-selector-wrapper e109n9an3 css-9be9yh')[0].innerHTML
+                    }, urlindex);
+                    
+                    // console.log(sizehtml);
+                    I.wait(1);
+    
+                    if (sizehtml.split('"'+ list[k].size + '"')[1].split('>'+ list[k].size + '<')[0].indexOf('disabled=""') === -1){
+                        availiabled = true
+                    } else{
+                        availiabled = false
+                    }
                 }
             }
+            
 
             now = getZoneTime();
 
