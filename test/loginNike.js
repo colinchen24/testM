@@ -70,15 +70,15 @@ Scenario('monitor nike', async function(I) {
                 I.wait(sleeptime);
                 // I.saveScreenshot('result0.jpg');
             } 
-
+console.log(samesizes);
             if(k !== 0 && list[k-1].url !== list[k].url && samesizes !== []) {
-                console.log(samesizes);
+                // console.log(samesizes);
                 await I.track(samesizes);  
                 samesizes = [];
                 
             } 
             if(k===0 && !firstRun && samesizes !== []){
-                console.log(samesizes);
+                // console.log(samesizes);
                 await I.track(samesizes); 
                 samesizes = [];
             }
