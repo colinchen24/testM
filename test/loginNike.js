@@ -173,7 +173,7 @@ console.log(samesizes);
                 logintime ++;
                 var list = await I.MonitorList({"frequency": process.env.TIME});
                 list = JSON.parse(list);
-                k = -1;
+                k = 0;
             }
         } catch (err) {
             console.log(err)
