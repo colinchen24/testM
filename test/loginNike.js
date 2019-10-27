@@ -68,7 +68,7 @@ Scenario('monitor nike', async function(I) {
                 
                 
                 I.wait(sleeptime);
-                I.saveScreenshot('result0.jpg');
+                // I.saveScreenshot('result0.jpg');
             } 
 
             if(k !== 0 && list[k-1].url !== list[k].url) {
@@ -86,7 +86,7 @@ Scenario('monitor nike', async function(I) {
             I.wait(2);
             firstRun = false;
             
-            I.saveScreenshot('result1.jpg');
+            // I.saveScreenshot('result1.jpg');
             await I.amOnPage('https://www.nike.com/cn/favorites');
             I.wait(sleeptime);
             
