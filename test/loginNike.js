@@ -109,7 +109,7 @@ Scenario('monitor nike', async function(I) {
             // I.saveScreenshot('result.jpg');
             if(urlindex === 999){
                 console.log('url is not in account..')
-                return;
+                // return;
             }
             I.wait(2);
             var buttoncontext = await I.executeScript(function(num) {
