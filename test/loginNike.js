@@ -109,8 +109,7 @@ Scenario('monitor nike', async function(I) {
             console.log("urlindex: " + urlindex);
             // I.saveScreenshot('result.jpg');
             I.wait(2);
-            if(urlindex !== 999){
-                var buttoncontext = await I.executeScript(function(num) {
+            var buttoncontext = await I.executeScript(function(num) {
                 if(document.getElementsByClassName('css-1isv87d e1ocvqf40').length !== 0){
                     return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;    
                 } else{
@@ -145,8 +144,6 @@ Scenario('monitor nike', async function(I) {
                         availiabled = false
                     }
                 }
-            }
-            
 
             now = getZoneTime();
 
