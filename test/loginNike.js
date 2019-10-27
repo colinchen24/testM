@@ -71,13 +71,13 @@ Scenario('monitor nike', async function(I) {
                 // I.saveScreenshot('result0.jpg');
             } 
 
-            if(k !== 0 && list[k-1].url !== list[k].url) {
+            if(k !== 0 && list[k-1].url !== list[k].url && samesizes !== []) {
                 console.log(samesizes);
                 await I.track(samesizes);  
                 samesizes = [];
                 
             } 
-            if(k===0 && !firstRun){
+            if(k===0 && !firstRun && samesizes !== []){
                 console.log(samesizes);
                 await I.track(samesizes); 
                 samesizes = [];
@@ -109,7 +109,7 @@ Scenario('monitor nike', async function(I) {
             console.log("urlindex: " + urlindex);
             // I.saveScreenshot('result.jpg');
             I.wait(2);
-            if(url !== 999){
+            if(urlindex !== 999){
                 var buttoncontext = await I.executeScript(function(num) {
                 if(document.getElementsByClassName('css-1isv87d e1ocvqf40').length !== 0){
                     return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;    
