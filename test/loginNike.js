@@ -126,8 +126,7 @@ Scenario('monitor nike', async function(I) {
 
             if(buttoncontext === "已售罄"){
                     availiabled = false;
-            }
-            else if(buttoncontext === "加入购物车")
+            }else if(buttoncontext === "加入购物车"){
                     availiabled = true;
             }else if (buttoncontext === "选择尺码") {
                 var sizehtml = await I.executeScript(function(num) {
