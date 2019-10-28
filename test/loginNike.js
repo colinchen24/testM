@@ -148,10 +148,6 @@ Scenario('monitor nike', async function(I) {
             }
 
             now = getZoneTime();
-
-            await I.executeScript(function() {
-                document.location.reload();
-            })
             console.log("======" + availiabled)
             if (availiabled) {
                 console.log('xxxxxx')
@@ -171,6 +167,11 @@ Scenario('monitor nike', async function(I) {
                     "time": now
                 })
             }
+
+            await I.executeScript(function() {
+                document.location.reload();
+            });
+
             //forever running
             if (k === list.length - 1) {
                 logintime++;
