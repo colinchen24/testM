@@ -152,6 +152,7 @@ console.log(samesizes);
             })
 
             if (availiabled) {
+                console.log('xxxxxx')
 
                 samesizes.push({
                     "url": list[k].url,
