@@ -124,14 +124,12 @@ Scenario('monitor nike', async function(I) {
 
             I.wait(3);
 
-            switch (buttoncontext) {
-                case "已售罄":
+            if(buttoncontext === "已售罄"){
                     availiabled = false;
-                case "加入购物车":
-                    availiabled = true;
             }
-
-            if (buttoncontext === "选择尺码") {
+            else if(buttoncontext === "加入购物车")
+                    availiabled = true;
+            }else if (buttoncontext === "选择尺码") {
                 var sizehtml = await I.executeScript(function(num) {
                     document.getElementsByClassName('ncss-col-sm-12 css-1pzxakv wishlist-grid-actions')[num].firstElementChild.click();
                     return document.getElementsByClassName('size-selector-wrapper e109n9an3 css-9be9yh')[0].innerHTML
@@ -150,7 +148,6 @@ Scenario('monitor nike', async function(I) {
             now = getZoneTime();
             console.log("======" + availiabled)
             if (availiabled) {
-                console.log('xxxxxx')
 
                 samesizes.push({
                     "url": list[k].url,
