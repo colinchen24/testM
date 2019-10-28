@@ -150,7 +150,7 @@ console.log(samesizes);
             await I.executeScript(function(){
                 document.location.reload();
             })
-
+            console.log(availiabled)
             if (availiabled) {
                 console.log('xxxxxx')
 
