@@ -31,7 +31,7 @@ Scenario('monitor nike', async function(I) {
     list = slist;
 
     var samesizes = [];
-    var isSameUrl = false;
+    
 
     function getZoneTime(){
         var localtime = new Date();  
@@ -49,17 +49,18 @@ Scenario('monitor nike', async function(I) {
     for (var k = 0; k < list.length; k++) {
 
         try {
-            if (k !== 0 && (list[k-1].url === list[k].url)){
-                console.log('url is the same with last one.');
-                isSameUrl = true;
-            } else {
-                console.log('save track: ' + list[k].url);
-                if(k !==0 && samesizes.length !== 0){
-                    await I.track(samesizes);    
+            if (k === 0 || (k !==0 && list[k-1].url !== list[k].url)){
+                console.log('k = 0 or url different ==' + k);
+
+                
+                if(samesizes.length !== 0){
+                    console.log('save track: ' + list[k].url);
+                    await I.track(samesizes);   
+                    samesizes = []; 
                 }
                 await I.clearCookie();
-                isSameUrl = false;
-                samesizes = [];
+                
+                
                 // I.wait(2)
                 await I.amOnPage(list[k].url);
                 // I.saveScreenshot('result.jpg');
@@ -89,6 +90,7 @@ Scenario('monitor nike', async function(I) {
                 },list[k].url,list[k].size)
 
             }
+
         availiabled = false;
         console.log(htmlcontext);
 
