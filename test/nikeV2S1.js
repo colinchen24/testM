@@ -129,7 +129,7 @@ Scenario('monitor nike', async function(I) {
             if(k === list.length-1){
                 var list = await I.MonitorList({"frequency": process.env.TIME});
                 list = JSON.parse(list);
-                k = 0;
+                k = -1;
                 slist =[];
 
                 for(var i=0; i< parseInt(list.length/4)*2; i++){
