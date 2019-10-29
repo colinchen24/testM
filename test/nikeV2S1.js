@@ -24,7 +24,7 @@ Scenario('monitor nike', async function(I) {
 
     var slist =[];
 
-    for(var i=0; i< parseInt(list.length/4)*2; i++){
+    for(var i=0; i< parseInt(list.length/2); i++){
         slist.push(list[i])
     }
 
@@ -135,7 +135,7 @@ Scenario('monitor nike', async function(I) {
                 k = -1;
                 slist =[];
 
-                for(var i=0; i< parseInt(list.length/4)*2; i++){
+                for(var i=0; i< parseInt(list.length/2); i++){
                     slist.push(list[i])
                 }
             
