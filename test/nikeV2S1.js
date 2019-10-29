@@ -89,6 +89,7 @@ Scenario('monitor nike', async function(I) {
                 },list[k].url,list[k].size)
 
             }
+        availiabled = false;
         console.log(htmlcontext);
 
         if(htmlcontext === "no document" || htmlcontext === "url changed" || htmlcontext === "out of stock"){
