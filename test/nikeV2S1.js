@@ -52,7 +52,6 @@ Scenario('monitor nike', async function(I) {
 
         try {
             if (k === 0 || (k !==0 && list[k-1].url !== list[k].url)){
-                console.log('k = 0 or url different ==' + k);
 
                 
                 if(samesizes.length !== 0){
