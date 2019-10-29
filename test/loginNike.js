@@ -23,7 +23,7 @@ Scenario('monitor nike', async function(I) {
         "frequency": process.env.TIME
     });
     list = JSON.parse(list);
-    list = list.contat(list);
+    list = list.concat(list);
     console.log(list)
 
     var samesizes = [];
