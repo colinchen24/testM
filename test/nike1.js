@@ -62,7 +62,7 @@ Scenario('monitor nike', async function(I) {
                 // I.wait(2)
                 await I.amOnPage(list[k].url);
                 // I.saveScreenshot('result.jpg');
-                I.wait(sleeptime);
+                // I.wait(sleeptime);
             }
 
             var availiabled = await I.executeScript(function(size, url) {
@@ -78,18 +78,6 @@ Scenario('monitor nike', async function(I) {
                 } else if(window.location.href !== url){
                     console.log('url changed')
                     return false;
-                }
-                else if (size === 'outOfStock') {
-                    if (document && document.getElementById('RightRail') && document.getElementById('RightRail').innerText && document.getElementById('RightRail').innerText !== "" && document.getElementById('RightRail').innerText.indexOf('售罄') === -1) {
-                        return true;
-                    }
-                } 
-                else if (document.getElementsByClassName('exp-gridwall-header-titles')[0] && document.getElementsByClassName('exp-gridwall-header-titles')[0].innerText.indexOf('耐克产品 (') !== -1 
-                        && document.getElementsByClassName('grid-item-box') && document.getElementsByClassName('grid-item-box')[0] 
-                        && (size.split('&').length ===3) 
-                        && (document.getElementsByClassName('grid-item-box')[0].innerText.replaceAll('\n','').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('grid-item-box')[1].innerText.replaceAll('\n','').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('grid-item-box')[2].innerText.replaceAll('\n','').indexOf(size.split('&')[2]) === -1)
-                        ){
-                    return true;
                 } else if(url ==='https://www.nike.com/cn/w/new-shoes-3n82yzy7ok?sort=newest' && 
                     (document.getElementsByClassName('product-card__body')[0].innerText.replaceAll('\n','').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('product-card__body')[1].innerText.replaceAll('\n','').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('product-card__body')[2].innerText.replaceAll('\n','').indexOf(size.split('&')[2]) === -1)
                     ){
