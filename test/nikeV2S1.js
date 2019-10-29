@@ -48,6 +48,8 @@ Scenario('monitor nike', async function(I) {
 
     for (var k = 0; k < list.length; k++) {
 
+        console.log('k = 0 or url different ==' + k + "url " + list[k].url);
+
         try {
             if (k === 0 || (k !==0 && list[k-1].url !== list[k].url)){
                 console.log('k = 0 or url different ==' + k);
