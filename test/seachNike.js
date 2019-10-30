@@ -21,6 +21,8 @@ Scenario('monitor nike search', async function(I) {
 
     var list = await I.MonitorList({"frequency": process.env.TIME});
     list = JSON.parse(list);
+    list.push(list[0]);
+    console.log(list)
 
     var samesizes = [];
     var isSameUrl = false;
@@ -40,13 +42,14 @@ Scenario('monitor nike search', async function(I) {
     for (var k = 0; k < list.length; k++) {
 
         try {
+
             await I.amOnPage('https://www.nike.com/cn/w?q=' + list[k].url);
 
             I.wait(sleeptime);
 
             var availiabled = await I.executeScript(function() {
 
-                if(document.getElementsByClassName('product-card css-ucpg4q ncss-col-sm-6 ncss-col-lg-4 va-sm-t product-grid__card').length !== 0){
+                if(document.getElementsByClassName('product-card css-ucpg4q ncss-col-sm-6 ncss-col-lg-4 va-sm-t product-grid__card') && document.getElementsByClassName('product-card css-ucpg4q ncss-col-sm-6 ncss-col-lg-4 va-sm-t product-grid__card').length !== 0){
                     return true;
                 } else{
                     return false;
@@ -59,21 +62,34 @@ Scenario('monitor nike search', async function(I) {
             if (availiabled) {
 
                 samesizes.push({
-                    "url": 'https://www.nike.com/cn/w?q=' + list[k].url,
+                    "url": list[k].url,
                     "size": list[k].size,
                     "status": 'enabled',
                     "time": now
                 });
+
+
+            } else{
+
+                samesizes.push({
+                    "url": list[k].url,
+                    "size": list[k].size,
+                    "status": 'disabled',
+                    "time": now
+                });
+
+            }
+
+            if(samesizes.length !== 0){
                 await I.track(samesizes); 
                 samesizes = [];
-
-
             }
             //forever running
             if(k === list.length-1){
                 var list = await I.MonitorList({"frequency": process.env.TIME});
                 list = JSON.parse(list);
-                k = 0;
+                k = -1;
+                // list.push(list[0]);
             }
         } catch (err) {
             console.log(err)
