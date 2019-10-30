@@ -57,7 +57,7 @@ exports.config = {
             "desiredCapabilities": {
                 "browserName": "chrome",
                // "version":"77.0",
-                "enableVNC":true,
+                // "enableVNC":true,
                 "enableVideo":false,
                 "name":"Medicare XM E2E",
                 "build":"Medicare XM Team",
