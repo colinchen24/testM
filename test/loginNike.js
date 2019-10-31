@@ -23,6 +23,7 @@ Scenario('monitor nike', async function(I) {
         "frequency": process.env.TIME
     });
     list = JSON.parse(list);
+    list.push(list[0]);
     console.log(list)
 
     var samesizes = [];
@@ -110,58 +111,61 @@ Scenario('monitor nike', async function(I) {
             availiabled = false;
             console.log("urlindex: " + urlindex);
             // I.saveScreenshot('result.jpg');
-            I.wait(2);
-            var buttoncontext = await I.executeScript(function(num) {
-                if (document.getElementsByClassName('css-1isv87d e1ocvqf40').length !== 0) {
-                    return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;
-                } else {
-                    return "not found"
-                }
+            
+            if (urlindex !== 999) {
+                I.wait(2);
+                var buttoncontext = await I.executeScript(function(num) {
+                    if (document.getElementsByClassName('css-1isv87d e1ocvqf40').length !== 0) {
+                        return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;
+                    } else {
+                        return "not found"
+                    }
 
-            }, urlindex);
-
-            console.log(buttoncontext);
-
-            I.wait(3);
-
-            if(buttoncontext === "已售罄"){
-                    availiabled = false;
-            }else if(buttoncontext === "加入购物车"){
-                    availiabled = true;
-            }else if (buttoncontext === "选择尺码") {
-                var sizehtml = await I.executeScript(function(num) {
-                    document.getElementsByClassName('ncss-col-sm-12 css-1pzxakv wishlist-grid-actions')[num].firstElementChild.click();
-                    return document.getElementsByClassName('size-selector-wrapper e109n9an3 css-9be9yh')[0].innerHTML
                 }, urlindex);
 
-                // console.log(sizehtml);
-                I.wait(1);
+                console.log(buttoncontext);
 
-                if (sizehtml.split('"' + list[k].size + '"')[1].split('>' + list[k].size + '<')[0].indexOf('disabled=""') === -1) {
-                    availiabled = true
-                } else {
-                    availiabled = false
+                I.wait(3);
+
+                if (buttoncontext === "已售罄") {
+                    availiabled = false;
+                } else if (buttoncontext === "加入购物车") {
+                    availiabled = true;
+                } else if (buttoncontext === "选择尺码") {
+                    var sizehtml = await I.executeScript(function(num) {
+                        document.getElementsByClassName('ncss-col-sm-12 css-1pzxakv wishlist-grid-actions')[num].firstElementChild.click();
+                        return document.getElementsByClassName('size-selector-wrapper e109n9an3 css-9be9yh')[0].innerHTML
+                    }, urlindex);
+
+                    // console.log(sizehtml);
+                    I.wait(1);
+
+                    if (sizehtml.split('"' + list[k].size + '"')[1].split('>' + list[k].size + '<')[0].indexOf('disabled=""') === -1) {
+                        availiabled = true
+                    } else {
+                        availiabled = false
+                    }
                 }
-            }
 
-            now = getZoneTime();
-            console.log("======" + availiabled)
-            if (availiabled) {
+                now = getZoneTime();
+                console.log("======" + availiabled)
+                if (availiabled) {
 
-                samesizes.push({
-                    "url": list[k].url,
-                    "size": list[k].size,
-                    "status": 'enabled',
-                    "time": now
-                })
+                    samesizes.push({
+                        "url": list[k].url,
+                        "size": list[k].size,
+                        "status": 'enabled',
+                        "time": now
+                    })
 
-            } else {
-                samesizes.push({
-                    "url": list[k].url,
-                    "size": list[k].size,
-                    "status": 'disabled',
-                    "time": now
-                })
+                } else {
+                    samesizes.push({
+                        "url": list[k].url,
+                        "size": list[k].size,
+                        "status": 'disabled',
+                        "time": now
+                    })
+                }
             }
 
             await I.executeScript(function() {
@@ -175,6 +179,7 @@ Scenario('monitor nike', async function(I) {
                     "frequency": process.env.TIME
                 });
                 list = JSON.parse(list);
+                list.push(list[0]);
                 k = 0;
             }
         } catch (err) {
