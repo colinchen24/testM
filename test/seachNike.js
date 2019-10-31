@@ -67,7 +67,7 @@ Scenario('monitor nike search', async function(I) {
 
                 samesizes.push({
                     "url": list[k].url,
-                    "size": 'new updated',
+                    "size": '',
                     "status": 'enabled',
                     "time": now
                 });
@@ -77,7 +77,7 @@ Scenario('monitor nike search', async function(I) {
 
                 samesizes.push({
                     "url": list[k].url,
-                    "size": 'new updated',
+                    "size": '',
                     "status": 'disabled',
                     "time": now
                 });
