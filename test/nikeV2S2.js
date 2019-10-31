@@ -80,11 +80,11 @@ Scenario('monitor nike', async function(I) {
                         return "no document"
                     } else if(window.location.href !== url){
                         return "url changed";
-                    } else if(url ==='https://www.nike.com/cn/w/new-shoes-3n82yzy7ok?sort=newest' && 
+                    } else if(url ==='https://www.nike.com/cn/w/new-shoes-3n82yzy7ok?sort=newest' && document.getElementsByClassName('product-card__body').length >2 &&
                         (document.getElementsByClassName('product-card__body')[0].innerText.replaceAll('\n','').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('product-card__body')[1].innerText.replaceAll('\n','').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('product-card__body')[2].innerText.replaceAll('\n','').indexOf(size.split('&')[2]) === -1)
                         ){
                         return 'new updated'
-                    } else if(document.getElementById('buyTools')){
+                    } else if(document.getElementById('buyTools').length !== 0){
                         return document.getElementById('buyTools').innerHTML
                     } else{
                         return "out of stock"
