@@ -30,6 +30,9 @@ Scenario('monitor nike', async function(I) {
 
     list = slist;
 
+    list[0].url="https://www.nike.com/cn/w/new-shoes-3n82yzy7ok?sort=newest";
+    list[0].size = "LeBron VII (GS)LeBron VII (GS)大童运动童鞋1 种 颜色￥1,169&LeBron VII (PS)LeBron VII (PS)幼童运动童鞋1 种 颜色￥599&Nike Air Ghost RacerNike Air Ghost Racer男子运动鞋1 种 颜色￥999"
+
     var samesizes = [];
     
 
@@ -78,7 +81,7 @@ Scenario('monitor nike', async function(I) {
                         return "no document"
                     } else if(window.location.href !== url){
                         return "url changed";
-                    } else if(url ==='https://www.nike.com/cn/w/new-shoes-3n82yzy7ok?sort=newest' && 
+                    } else if(url ==='https://www.nike.com/cn/w/new-shoes-3n82yzy7ok?sort=newest' && document.getElementsByClassName('product-card__body').length >2 &&
                         (document.getElementsByClassName('product-card__body')[0].innerText.replaceAll('\n','').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('product-card__body')[1].innerText.replaceAll('\n','').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('product-card__body')[2].innerText.replaceAll('\n','').indexOf(size.split('&')[2]) === -1)
                         ){
                         return 'new updated'

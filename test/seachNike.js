@@ -47,15 +47,19 @@ Scenario('monitor nike search', async function(I) {
 
             I.wait(sleeptime);
 
-            var availiabled = await I.executeScript(function() {
-
-                if(document.getElementsByClassName('product-card css-ucpg4q ncss-col-sm-6 ncss-col-lg-4 va-sm-t product-grid__card') && document.getElementsByClassName('product-card css-ucpg4q ncss-col-sm-6 ncss-col-lg-4 va-sm-t product-grid__card').length !== 0){
+            var availiabled = await I.executeScript(function(url,size) {
+                if(url ==='https://www.nike.com/cn/w/new-shoes-3n82yzy7ok?sort=newest' && document.getElementsByClassName('product-card__body').length >2 && 
+                        (document.getElementsByClassName('product-card__body')[0].innerText.replaceAll('\n','').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('product-card__body')[1].innerText.replaceAll('\n','').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('product-card__body')[2].innerText.replaceAll('\n','').indexOf(size.split('&')[2]) === -1)
+                        ){
+                        return true;
+                }
+                else if(document.getElementsByClassName('product-card css-ucpg4q ncss-col-sm-6 ncss-col-lg-4 va-sm-t product-grid__card') && document.getElementsByClassName('product-card css-ucpg4q ncss-col-sm-6 ncss-col-lg-4 va-sm-t product-grid__card').length !== 0){
                     return true;
                 } else{
                     return false;
                 }
 
-                 });
+                 }, list[k].url, list[k].size);
 
             now = getZoneTime();
 
@@ -63,7 +67,7 @@ Scenario('monitor nike search', async function(I) {
 
                 samesizes.push({
                     "url": list[k].url,
-                    "size": list[k].size,
+                    "size": 'new updated',
                     "status": 'enabled',
                     "time": now
                 });
@@ -73,7 +77,7 @@ Scenario('monitor nike search', async function(I) {
 
                 samesizes.push({
                     "url": list[k].url,
-                    "size": list[k].size,
+                    "size": 'new updated',
                     "status": 'disabled',
                     "time": now
                 });
