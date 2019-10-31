@@ -46,9 +46,9 @@ Scenario('monitor nike', async function(I) {
         return nd.toDateString()+" "+nd.getHours()+":"+nd.getMinutes()+":"+nd.getSeconds(); 
     }
   var now = getZoneTime();
+  var k=Math.floor(Math.random() * Math.floor(list.length))
   var htmlcontext = '';
-
-    for (var k = 0; k < list.length; k++) {
+    for (k; k < list.length; k++) {
 
         console.log('k = 0 or url different ==' + k + "url " + list[k].url +" size "+ list[k].size);
 
@@ -68,7 +68,7 @@ Scenario('monitor nike', async function(I) {
                 await I.amOnPage(list[k].url);
                 // I.saveScreenshot('result.jpg');
                 // I.wait(sleeptime);
-                htmlcontext = await I.executeScript(function(url,size){
+                htmlcontext = await I.executeScript(function(url,size,price){
                     if(!"".replaceAll){
                     String.prototype.replaceAll = function(search, replacement) {
                         var target = this;
@@ -85,12 +85,14 @@ Scenario('monitor nike', async function(I) {
                         (document.getElementsByClassName('product-card__body')[0].innerText.replaceAll('\n','').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('product-card__body')[1].innerText.replaceAll('\n','').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('product-card__body')[2].innerText.replaceAll('\n','').indexOf(size.split('&')[2]) === -1)
                         ){
                         return 'new updated'
+                    } else if(price !== '' && price && document.querySelectorAll('[data-test="product-price"]') && document.querySelectorAll('[data-test="product-price"]')[0].innerText.split('￥')[1].replace(',','') !== price){
+                        return 'price updated';
                     } else if(document.getElementById('buyTools')){
                         return document.getElementById('buyTools').innerHTML
                     } else{
                         return "out of stock"
                     }
-                },list[k].url,list[k].size)
+                },list[k].url,list[k].size,list[k].price)
 
             }
 
@@ -103,23 +105,26 @@ Scenario('monitor nike', async function(I) {
         } else if(htmlcontext === 'new updated'){
             console.log('==== 2');
             availiabled = true;
-        } else if(htmlcontext.split(list[k].size + '"').length > 1 && htmlcontext.split(list[k].size + '"')[1].split("class=")[0].indexOf('disabled') === -1){
+        } else if(htmlcontext === 'price updated'){
             console.log('==== 3');
             availiabled = true;
-        } else{
+        } else if(htmlcontext.split(list[k].size + '"').length > 1 && htmlcontext.split(list[k].size + '"')[1].split("class=")[0].indexOf('disabled') === -1){
             console.log('==== 4');
+            availiabled = true;
+        } else{
+            console.log('==== 5');
             availiabled =false;
         }
 
-        now = getZoneTime();
-
+        var now = getZoneTime();
         if (availiabled) {
 
                 samesizes.push({
                     "url": list[k].url,
                     "size": list[k].size,
                     "status": 'enabled',
-                    "time": now
+                    "time": now,
+                    "utctime":now
                 })
 
             } else {
@@ -127,7 +132,8 @@ Scenario('monitor nike', async function(I) {
                     "url": list[k].url,
                     "size": list[k].size,
                     "status": 'disabled',
-                    "time": now
+                    "time": now,
+                    "utctime":now
                 })
             }
             //forever running
@@ -135,13 +141,6 @@ Scenario('monitor nike', async function(I) {
                 var list = await I.MonitorList({"frequency": process.env.TIME});
                 list = JSON.parse(list);
                 k = -1;
-                slist =[];
-
-                for(var i=0; i< list.length; i++){
-                    slist.push(list[i])
-                }
-            
-                list = slist;
             }
         } catch (err) {
             console.log(err)

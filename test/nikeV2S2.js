@@ -67,7 +67,7 @@ Scenario('monitor nike', async function(I) {
                 await I.amOnPage(list[k].url);
                 // I.saveScreenshot('result.jpg');
                 // I.wait(sleeptime);
-                htmlcontext = await I.executeScript(function(url,size){
+                htmlcontext = await I.executeScript(function(url,size,price){
                     if(!"".replaceAll){
                     String.prototype.replaceAll = function(search, replacement) {
                         var target = this;
@@ -84,12 +84,14 @@ Scenario('monitor nike', async function(I) {
                         (document.getElementsByClassName('product-card__body')[0].innerText.replaceAll('\n','').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('product-card__body')[1].innerText.replaceAll('\n','').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('product-card__body')[2].innerText.replaceAll('\n','').indexOf(size.split('&')[2]) === -1)
                         ){
                         return 'new updated'
-                    } else if(document.getElementById('buyTools').length !== 0){
+                    } else if(price !== '' && price && document.querySelectorAll('[data-test="product-price"]') && document.querySelectorAll('[data-test="product-price"]')[0].innerText.split('￥')[1].replace(',','') !== price){
+                        return 'price updated';
+                    } else if(document.getElementById('buyTools')){
                         return document.getElementById('buyTools').innerHTML
                     } else{
                         return "out of stock"
                     }
-                },list[k].url,list[k].size)
+                },list[k].url,list[k].size,list[k].price)
 
             }
         availiabled = false;
@@ -101,11 +103,14 @@ Scenario('monitor nike', async function(I) {
         } else if(htmlcontext === 'new updated'){
             console.log('==== 2');
             availiabled = true;
-        } else if(htmlcontext.split(list[k].size + '"').length > 1 && htmlcontext.split(list[k].size + '"')[1].split("class=")[0].indexOf('disabled') === -1){
+        } else if(htmlcontext === 'price updated'){
             console.log('==== 3');
             availiabled = true;
-        } else{
+        }  else if(htmlcontext.split(list[k].size + '"').length > 1 && htmlcontext.split(list[k].size + '"')[1].split("class=")[0].indexOf('disabled') === -1){
             console.log('==== 4');
+            availiabled = true;
+        } else{
+            console.log('==== 5');
             availiabled =false;
         }
 
