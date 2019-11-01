@@ -42,8 +42,12 @@ Scenario('monitor nike search', async function(I) {
     for (var k = 0; k < list.length; k++) {
 
         try {
-
-            await I.amOnPage('https://www.nike.com/cn/w?q=' + list[k].url);
+            if(list[k].url.indexOf('https') === -1){
+                await I.amOnPage('https://www.nike.com/cn/w?q=' + list[k].url);
+            } else{
+                await I.amOnPage(list[k].url);
+            }
+            
 
             I.wait(sleeptime);
 
