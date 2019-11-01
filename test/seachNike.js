@@ -52,6 +52,7 @@ Scenario('monitor nike search', async function(I) {
                         var target = this;
                         return target.replace(new RegExp(search, 'g'), replacement);
                     };
+            }
 
             var availiabled = await I.executeScript(function(url,size) {
                 if(url ==='https://www.nike.com/cn/w/new-shoes-3n82yzy7ok?sort=newest' && document.getElementsByClassName('product-card__body').length >2 && 
