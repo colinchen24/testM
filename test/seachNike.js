@@ -51,14 +51,16 @@ Scenario('monitor nike search', async function(I) {
 
             I.wait(sleeptime);
 
-            if(!"".replaceAll){
+
+            var availiabled = await I.executeScript(function(url,size) {
+
+                if(!"".replaceAll){
                     String.prototype.replaceAll = function(search, replacement) {
                         var target = this;
                         return target.replace(new RegExp(search, 'g'), replacement);
                     };
-            }
+                }
 
-            var availiabled = await I.executeScript(function(url,size) {
                 if(url ==='https://www.nike.com/cn/w/new-shoes-3n82yzy7ok?sort=newest' && document.getElementsByClassName('product-card__body').length >2 && 
                         (document.getElementsByClassName('product-card__body')[0].innerText.replaceAll('\n','').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('product-card__body')[1].innerText.replaceAll('\n','').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('product-card__body')[2].innerText.replaceAll('\n','').indexOf(size.split('&')[2]) === -1)
                         ){
