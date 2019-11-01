@@ -80,7 +80,7 @@ Scenario('monitor nike search', async function(I) {
 
                 samesizes.push({
                     "url": list[k].url,
-                    "size": '',
+                    "size": list[k].size,
                     "status": 'enabled',
                     "time": now
                 });
@@ -90,7 +90,7 @@ Scenario('monitor nike search', async function(I) {
 
                 samesizes.push({
                     "url": list[k].url,
-                    "size": '',
+                    "size": list[k].size,
                     "status": 'disabled',
                     "time": now
                 });
