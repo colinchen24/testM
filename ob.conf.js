@@ -1,6 +1,7 @@
 var config = require("config");
 var host = config.get('host');
 var port = config.get('port');
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 var chromeOptions = {
     "useAutomationExtension": false,
     // "args": ["--disable-web-security"]

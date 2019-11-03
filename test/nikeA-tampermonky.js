@@ -23,7 +23,7 @@ function MonitorList(frequency) {
         }
       }
 
-      xhr.open('POST', 'http://127.0.0.1:2222/test/getmonitor', false);
+      xhr.open('POST', 'https://127.0.0.1:2222/test/getmonitor', false);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.send(JSON.stringify({"frequency":frequency}));
 
@@ -39,7 +39,7 @@ function track(body) {
         }
       }
 
-      xhr.open('POST', 'http://127.0.0.1:2222/test/track', false);
+      xhr.open('POST', 'https://127.0.0.1:2222/test/track', false);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.send(JSON.stringify(body));
 

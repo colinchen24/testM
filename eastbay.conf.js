@@ -1,6 +1,7 @@
 var config = require("config");
 var host = config.get('host');
 var port = config.get('port');
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 var chromeOptions = {
     "useAutomationExtension": false,
     "args": ["--window-size=1800,1600","--headless","--no-sandbox","--disable-dev-shm-usage", "--disable-gpu", "--blink-settings=imagesEnabled=false"] //"--headless",
