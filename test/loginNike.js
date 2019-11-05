@@ -72,6 +72,7 @@ Scenario('monitor nike', async function(I) {
 
                 I.wait(sleeptime);
                 // I.saveScreenshot('result0.jpg');
+                await I.amOnPage('https://www.nike.com/cn/favorites');
             }
             console.log(samesizes);
             if (k !== 0 && list[k - 1].url !== list[k].url && samesizes.length !== 0) {
@@ -86,11 +87,10 @@ Scenario('monitor nike', async function(I) {
                 samesizes = [];
             }
 
-            I.wait(2);
+            // I.wait(2);
             firstRun = false;
 
-            // I.saveScreenshot('result1.jpg');
-            await I.amOnPage('https://www.nike.com/cn/favorites');
+            // I.saveScreenshot('result1.jpg'); 
             I.wait(sleeptime);
 
 
@@ -113,7 +113,7 @@ Scenario('monitor nike', async function(I) {
             // I.saveScreenshot('result.jpg');
             
             if (urlindex !== 999) {
-                I.wait(2);
+                I.wait(1);
                 var buttoncontext = await I.executeScript(function(num) {
                     if (document.getElementsByClassName('css-1isv87d e1ocvqf40').length !== 0) {
                         return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;
@@ -125,7 +125,7 @@ Scenario('monitor nike', async function(I) {
 
                 console.log(buttoncontext);
 
-                I.wait(3);
+                I.wait(1);
 
                 if (buttoncontext === "已售罄") {
                     availiabled = false;
@@ -168,10 +168,6 @@ Scenario('monitor nike', async function(I) {
                 }
             }
 
-            await I.executeScript(function() {
-                document.location.reload();
-            });
-
             //forever running
             if (k === list.length - 1) {
                 logintime++;
@@ -181,6 +177,12 @@ Scenario('monitor nike', async function(I) {
                 list = JSON.parse(list);
                 list.push(list[0]);
                 k = 0;
+                I.wait(1);
+
+                await I.executeScript(function() {
+                    document.location.reload();
+                });
+                I.wait(2);
             }
         } catch (err) {
             console.log(err)
