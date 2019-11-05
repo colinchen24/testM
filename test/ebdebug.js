@@ -16,7 +16,7 @@ var q = require('q');
       headers: {
         'Content-Type': 'application/json'
       },
-      url: 'http://176.122.147.10:2222/test/getmonitor',
+      url: 'https://176.122.147.10:2222/test/getmonitor',
       body: JSON.stringify(body)
     }, function(error, response, body) {
       // console.log(response.body)
@@ -48,7 +48,7 @@ var q = require('q');
       headers: {
         'Content-Type': 'application/json'
       },
-      url: 'http://176.122.147.10:2222/test/track',
+      url: 'https://176.122.147.10:2222/test/track',
       body: JSON.stringify(data)
     }, function(error, response, body) {
       // console.log(response.body)

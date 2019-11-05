@@ -43,6 +43,7 @@ var browsers = [{
         'project':'android tablet'
     }
 }]
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 exports.config = {
     "tests": "./test/" + process.profile,
     "timeout": 100000,

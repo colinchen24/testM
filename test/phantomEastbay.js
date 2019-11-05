@@ -42,7 +42,7 @@ page.open('https://www.eastbay.com/category/shoes/nike.html', function() {
                 
             }
         }
-        xmlHttp.open("POST", 'http://127.0.0.1:2222/test/getmonitor', true); // true for asynchronous 
+        xmlHttp.open("POST", 'https://127.0.0.1:2222/test/getmonitor', true); // true for asynchronous 
         xmlHttp.send(JSON.stringify(
                 {"frequency": "sh"}
             ));
