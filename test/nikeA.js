@@ -53,13 +53,6 @@ Scenario('monitor nike', async function(I) {
         try {
             if (k === 0 || (k !== 0 && list[k - 1].url !== list[k].url)) {
 
-            console.log("====================" + sleeptime + "====================");
-            if( sleeptime > 0){
-                I.wait(sleeptime);
-               }
-               
-
-
                 if (samesizes.length !== 0) {
                     console.log('save track: ' + list[k].url);
                     await I.track(samesizes);
@@ -74,6 +67,7 @@ Scenario('monitor nike', async function(I) {
                 // I.saveScreenshot('result.jpg');
                 // I.wait(sleeptime);
                 htmlcontext = "htmlcontext";
+                
                 htmlcontext = await I.executeScript(function(url, size, price) {
                     if (!"".replaceAll) {
                         String.prototype.replaceAll = function(search, replacement) {
@@ -110,10 +104,16 @@ Scenario('monitor nike', async function(I) {
                     }
                 }
 
+                console.log("====================" + sleeptime + "====================");
+                if( sleeptime > 0){
+                    I.wait(sleeptime);
+                }
+                console.log(htmlcontext);
+
             }
 
             availiabled = false;
-            console.log(htmlcontext);
+            
             if (htmlcontext !== "Forbidden" && htmlcontext !== "htmlcontext") {
                 // console.log('access');
 
