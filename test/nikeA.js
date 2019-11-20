@@ -53,6 +53,12 @@ Scenario('monitor nike', async function(I) {
         try {
             if (k === 0 || (k !== 0 && list[k - 1].url !== list[k].url)) {
 
+            console.log("====================" + sleeptime + "====================");
+            if( sleeptime > 0){
+                I.wait(sleeptime);
+               }
+               
+
 
                 if (samesizes.length !== 0) {
                     console.log('save track: ' + list[k].url);
@@ -102,7 +108,7 @@ Scenario('monitor nike', async function(I) {
                 if(sleeptime >= 1){
                     sleeptime--;
                 }
-                console.log('access');
+                // console.log('access');
 
                 if (htmlcontext === "url changed" || htmlcontext === "out of stock") {
                     console.log('==== 1');
@@ -144,10 +150,6 @@ Scenario('monitor nike', async function(I) {
                 }
             }
 
-            if( sleeptime > 0){
-                I.wait(sleeptime);
-                console.log("====================" + sleeptime + "====================");
-            }
             //forever running
             if (k === list.length - 1) {
                 var list = await I.MonitorList({
