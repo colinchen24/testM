@@ -99,6 +99,9 @@ Scenario('monitor nike', async function(I) {
             availiabled = false;
             console.log(htmlcontext);
             if (htmlcontext !== "Forbidden" && htmlcontext !== "htmlcontext") {
+                if(sleeptime >= 1){
+                    sleeptime--;
+                }
                 console.log('access');
 
                 if (htmlcontext === "url changed" || htmlcontext === "out of stock") {
@@ -135,6 +138,15 @@ Scenario('monitor nike', async function(I) {
                         "utctime": now
                     })
                 }
+            } else if(htmlcontext === "Forbidden"){
+                if(sleeptime < 5) {
+                    sleeptime++;
+                }
+            }
+
+            if( sleeptime > 0){
+                I.wait(sleeptime);
+                console.log("====================" + sleeptime + "====================");
             }
             //forever running
             if (k === list.length - 1) {
