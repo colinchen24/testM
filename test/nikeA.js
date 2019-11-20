@@ -67,6 +67,7 @@ Scenario('monitor nike', async function(I) {
                 await I.amOnPage(list[k].url);
                 // I.saveScreenshot('result.jpg');
                 // I.wait(sleeptime);
+                htmlcontext = "htmlcontext";
                 htmlcontext = await I.executeScript(function(url, size, price) {
                     if (!"".replaceAll) {
                         String.prototype.replaceAll = function(search, replacement) {
@@ -88,7 +89,7 @@ Scenario('monitor nike', async function(I) {
                         return 'price updated';
                     } else if (document.getElementById('buyTools')) {
                         return document.getElementById('buyTools').innerHTML
-                    } else {
+                    } else if(document.getElementById('RightRail') && document.getElementById('RightRail').innerText.indexOf('售罄：') !== -1){
                         return "out of stock"
                     }
                 }, list[k].url, list[k].size, list[k].price)
@@ -97,7 +98,7 @@ Scenario('monitor nike', async function(I) {
 
             availiabled = false;
             console.log(htmlcontext);
-            if (htmlcontext !== "Forbidden") {
+            if (htmlcontext !== "Forbidden" && htmlcontext !== "htmlcontext") {
                 console.log('access');
 
                 if (htmlcontext === "url changed" || htmlcontext === "out of stock") {
@@ -112,9 +113,6 @@ Scenario('monitor nike', async function(I) {
                 } else if (htmlcontext.split(list[k].size + '"').length > 1 && htmlcontext.split(list[k].size + '"')[1].split("class=")[0].indexOf('disabled') === -1) {
                     console.log('==== 4');
                     availiabled = true;
-                } else {
-                    console.log('==== 5');
-                    availiabled = false;
                 }
 
                 var now = getZoneTime();
