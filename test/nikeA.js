@@ -45,7 +45,7 @@ Scenario('monitor nike', async function(I) {
     }
     var now = getZoneTime();
     var k = Math.floor(Math.random() * Math.floor(list.length))
-    var htmlcontext = '';
+    var htmlcontext = 'htmlcontext';
     for (k; k < list.length; k++) {
 
         console.log('k = 0 or url different ==' + k + "url " + list[k].url + " size " + list[k].size);
