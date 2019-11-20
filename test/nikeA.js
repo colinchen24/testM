@@ -98,16 +98,23 @@ Scenario('monitor nike', async function(I) {
                     } else if(document.getElementById('RightRail') && document.getElementById('RightRail').innerText.indexOf('售罄：') !== -1){
                         return "out of stock"
                     }
-                }, list[k].url, list[k].size, list[k].price)
+                }, list[k].url, list[k].size, list[k].price);
+
+                if (htmlcontext !== "Forbidden" && htmlcontext !== "htmlcontext") {
+                    if(sleeptime > 0){
+                        sleeptime--;
+                    }
+                } else if(htmlcontext === "Forbidden"){
+                    if(sleeptime < 5) {
+                        sleeptime++;
+                    }
+                }
 
             }
 
             availiabled = false;
             console.log(htmlcontext);
             if (htmlcontext !== "Forbidden" && htmlcontext !== "htmlcontext") {
-                if(sleeptime >= 1){
-                    sleeptime--;
-                }
                 // console.log('access');
 
                 if (htmlcontext === "url changed" || htmlcontext === "out of stock") {
@@ -144,11 +151,7 @@ Scenario('monitor nike', async function(I) {
                         "utctime": now
                     })
                 }
-            } else if(htmlcontext === "Forbidden"){
-                if(sleeptime < 5) {
-                    sleeptime++;
-                }
-            }
+            } 
 
             //forever running
             if (k === list.length - 1) {
