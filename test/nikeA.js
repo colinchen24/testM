@@ -49,11 +49,13 @@ Scenario('monitor nike', async function(I) {
     var falseFlag = false;
     for (k; k < list.length; k++) {
 
-        console.log('k = 0 or url different ==' + k + "url " + list[k].url + " size " + list[k].size);
+        
 
         try {
             if (k === 0 || (k !== 0 && list[k - 1].url !== list[k].url)) {
 
+                console.log('k = 0 or url different ==' + k + "url " + list[k].url + " size " + list[k].size);
+                
                 if (samesizes.length !== 0) {
                     console.log('save track: ' + list[k].url);
                     await I.track(samesizes);
@@ -89,7 +91,14 @@ Scenario('monitor nike', async function(I) {
                     } else if (price !== '' && price && document.querySelectorAll('[data-test="product-price"]') && document.querySelectorAll('[data-test="product-price"]')[0].innerText.split('￥')[1].replace(',', '') !== price) {
                         return 'price updated';
                     } else if (document.getElementById('buyTools')) {
-                        return document.getElementById('buyTools').innerHTML
+                        if(document.getElementById('buyTools').innerHTML.indexOf(list[k].size) !== -1){
+                            return document.getElementById('buyTools').innerHTML;
+                        } else {
+                            setTimeout(function() {
+                                return document.getElementById('buyTools').innerHTML;
+                            }, 2000);
+                        }
+                        
                     } else if(document.getElementById('RightRail') && document.getElementById('RightRail').innerText.indexOf('售罄：') !== -1){
                         return "out of stock"
                     }
@@ -115,22 +124,23 @@ Scenario('monitor nike', async function(I) {
 
             availiabled = false;
             falseFlag = false;
+
             
             if (htmlcontext !== "Forbidden" && htmlcontext !== "htmlcontext") {
                 // console.log('access');
 
                 if (htmlcontext === "url changed" || htmlcontext === "out of stock") {
-                    console.log('==== 1');
+                    // console.log('==== 1');
                     availiabled = false;
                     falseFlag =true;
                 } else if (htmlcontext === 'new updated') {
-                    console.log('==== 2');
+                    // console.log('==== 2');
                     availiabled = true;
                 } else if (htmlcontext === 'price updated') {
-                    console.log('==== 3');
+                    // console.log('==== 3');
                     availiabled = true;
                 } else if (htmlcontext.split(list[k].size + '</label>').length > 1 && htmlcontext.split(list[k].size + '</label>')[0].split("<input")[htmlcontext.split(list[k].size + '</label>')[0].split("<input").length -1 ].indexOf('disabled') === -1) {
-                    console.log('==== 4');
+                    // console.log('==== 4');
                     availiabled = true;
                 }
 
