@@ -169,11 +169,15 @@ Scenario('monitor nike', async function(I) {
 
                     if (htmlcontext.split(list[k].size + '</label>').length > 1 && htmlcontext.split(list[k].size + '</label>')[0].split("<input")[htmlcontext.split(list[k].size + '</label>')[0].split("<input").length - 1].indexOf('disabled') === -1) {
                         availiabled = true;
-                    }
+                    } else if (htmlcontext.split(list[k].size + '</label>').length > 1 && htmlcontext.split(list[k].size + '</label>')[0].split("<input")[htmlcontext.split(list[k].size + '</label>')[0].split("<input").length - 1].indexOf('disabled') !== -1) {
+                        falseFlag = true;
+                    } 
 
                 } else if (htmlcontext.split(list[k].size + '</label>').length > 1 && htmlcontext.split(list[k].size + '</label>')[0].split("<input")[htmlcontext.split(list[k].size + '</label>')[0].split("<input").length - 1].indexOf('disabled') === -1) {
-                    availiabled = true;
-                }
+                        availiabled = true;
+                } else if (htmlcontext.split(list[k].size + '</label>').length > 1 && htmlcontext.split(list[k].size + '</label>')[0].split("<input")[htmlcontext.split(list[k].size + '</label>')[0].split("<input").length - 1].indexOf('disabled') !== -1) {
+                        falseFlag = true;
+                } 
 
 
 
