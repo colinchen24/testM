@@ -64,7 +64,7 @@ exports.config = {
                 "chromeOptions": chromeOptions,
                 "proxy": {
                   "proxyType": "manual",
-                  "httpProxy": '176.122.147.10:8085',
+                  "httpProxy": 'tps168.kdlapi.com:15818',
                   "noProxy": "127.0.0.1,176.122.147.10"
                 }
               }
