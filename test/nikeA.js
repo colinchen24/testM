@@ -180,9 +180,9 @@ Scenario('monitor nike', async function(I) {
                         falseFlag = true;
                 } 
 
-                console.log( list[k].url + " ----- " + list[k].size + " ----- " + availiabled + " ----- " + htmlcontext);
-
                 var now = getZoneTime();
+                console.log( list[k].url + " ----- " + list[k].size + " ----- " + availiabled + " ----- " + now + " ----- " +  htmlcontext);
+                
                 if (availiabled) {
 
                     samesizes.push({
