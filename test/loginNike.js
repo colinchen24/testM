@@ -6,14 +6,14 @@ Scenario('monitor nike', async function(I) {
 
     // console.log(process.env.TIME)
 
-    var sleeptime = 10;
+    var sleeptime = 5;
 
     switch (process.env.TIME) {
         case "sh":
             sleeptime = 1;
             break;
         case "sc":
-            sleeptime = 3;
+            sleeptime = 1;
             break;
     }
 
@@ -49,23 +49,17 @@ Scenario('monitor nike', async function(I) {
         // var k =0;
 
         try {
-            if ((k === 0 && (firstRun || list[k].email !== list[list.length - 1].emai)) || (k !== 0 && list[k - 1].email !== list[k].email)) {
+            if ((k === 0 && firstRun) || (k !== 0 && list[k - 1].email !== list[k].email) || (!firstRun && k === 0 && list[k].email !== list[list.length -1].email)) {
                 await I.clearCookie();
                 await I.amOnPage('https://www.nike.com/cn/login');
-                I.wait(5);
+                I.wait(1);
                 var login = await I.executeScript(function(email, pw) {
+                    if(document.getElementsByClassName("nike-unite-component action-link mobileNumberToEmailLoginLink toggle-action-link").length > 0){
                     document.getElementsByClassName("nike-unite-component action-link mobileNumberToEmailLoginLink toggle-action-link")[0].firstElementChild.click();
                     document.getElementsByName('emailAddress')[0].value = email;
                     document.getElementsByName('password')[0].value = pw;
                     document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component")[0].firstElementChild.click();
-                    setTimeout(function() {
-                        if (document.getElementsByClassName("nike-unite-error-close")) {
-                            document.getElementsByClassName("nike-unite-error-close")[0].firstElementChild.click()
-                            document.getElementsByName('emailAddress')[0].value = email;
-                            document.getElementsByName('password')[0].value = pw;
-                            document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component")[0].firstElementChild.click();
-                        }
-                    }, 6000);
+                }
                     return true;
                 }, list[k].email, 'Pzz1990.');
 
@@ -73,7 +67,9 @@ Scenario('monitor nike', async function(I) {
                 I.wait(sleeptime);
                 // I.saveScreenshot('result0.jpg');
                 await I.amOnPage('https://www.nike.com/cn/favorites');
+                I.wait(sleeptime);
             }
+
             console.log(samesizes);
             if (k !== 0 && list[k - 1].url !== list[k].url && samesizes.length !== 0) {
                 // console.log(samesizes);
@@ -90,10 +86,6 @@ Scenario('monitor nike', async function(I) {
             // I.wait(2);
             firstRun = false;
 
-            // I.saveScreenshot('result1.jpg'); 
-            I.wait(sleeptime);
-
-
             urlindex = await I.executeScript(function(url) {
                 var k = 999;
                 if (document.getElementsByClassName('ncss-col-sm-6 ncss-col-lg-4 product-card css-5qttql') && document.getElementsByClassName('ncss-col-sm-6 ncss-col-lg-4 product-card css-5qttql').length > 0) {
@@ -107,13 +99,13 @@ Scenario('monitor nike', async function(I) {
 
             }, list[k].url);
 
-            I.wait(1);
+            // I.wait(1);
             availiabled = false;
             console.log("urlindex: " + urlindex);
             // I.saveScreenshot('result.jpg');
             
             if (urlindex !== 999) {
-                I.wait(1);
+                // I.wait(1);
                 var buttoncontext = await I.executeScript(function(num) {
                     if (document.getElementsByClassName('css-1isv87d e1ocvqf40').length !== 0) {
                         return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;
@@ -125,7 +117,7 @@ Scenario('monitor nike', async function(I) {
 
                 console.log(buttoncontext);
 
-                I.wait(1);
+                // I.wait(1);
 
                 if (buttoncontext === "已售罄") {
                     availiabled = false;
@@ -138,7 +130,7 @@ Scenario('monitor nike', async function(I) {
                     }, urlindex);
 
                     // console.log(sizehtml);
-                    I.wait(1);
+                    // I.wait(1);
 
                     if (sizehtml.split('"' + list[k].size + '"')[1].split('>' + list[k].size + '<')[0].indexOf('disabled=""') === -1) {
                         availiabled = true
@@ -148,7 +140,7 @@ Scenario('monitor nike', async function(I) {
                 }
 
                 now = getZoneTime();
-                console.log("======" + availiabled)
+                // console.log("======" + availiabled)
                 if (availiabled) {
 
                     samesizes.push({
@@ -176,13 +168,9 @@ Scenario('monitor nike', async function(I) {
                 });
                 list = JSON.parse(list);
                 list.push(list[0]);
-                k = 0;
-                I.wait(1);
-
-                await I.executeScript(function() {
-                    document.location.reload();
-                });
-                I.wait(2);
+                k = -1;
+                await I.amOnPage('https://www.nike.com/cn/favorites');
+                I.wait(sleeptime);
             }
         } catch (err) {
             console.log(err)

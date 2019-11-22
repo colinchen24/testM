@@ -5,7 +5,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 var chromeOptions = {
     "useAutomationExtension": false,
     // "args": ["--disable-web-security"]
-    "args": ["--no-sandbox","--disable-dev-shm-usage", "--disable-gpu", "--blink-settings=imagesEnabled=false","--disable-web-security"]
+    "args": ["--no-sandbox","--incognito","--headless","--disable-dev-shm-usage", "--disable-gpu", "--blink-settings=imagesEnabled=false","--disable-web-security"]
     // "args": ["--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_1_1 like Mac OS X) AppleWebKit/602.2.14 (KHTML, like Gecko)","--window-size=375,812"]
 };
 
@@ -65,8 +65,8 @@ exports.config = {
                 "chromeOptions": chromeOptions,
                 "proxy": {
                   "proxyType": "manual",
-                  "httpProxy": '176.122.147.10:8085',
-                  "noProxy": "127.0.0.1,176.122.147.10"
+                  "httpProxy": 'tps168.kdlapi.com:15818',
+                  "noProxy": "176.122.147.10"
                 }
               }
         }
