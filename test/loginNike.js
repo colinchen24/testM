@@ -65,11 +65,29 @@ Scenario('monitor nike', async function(I) {
 
 
                 I.wait(sleeptime);
+                var loginAgain = false;
+
+                loginAgain = await I.executeScript(function(){
+                    if(document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component").length > 0 || document.getElementsByName('emailAddress').length > 0){
+                        return true;
+                    }
+                })
                 // I.saveScreenshot('result0.jpg');
                 await I.amOnPage('https://www.nike.com/cn/favorites');
-                I.wait(sleeptime);
-            }
 
+                I.wait(sleeptime);
+
+                loginAgain = await I.executeScript(function(){
+                    if(document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component").length > 0 || document.getElementsByName('emailAddress').length > 0){
+                        return true;
+                    }
+                })
+            }
+            if(loginAgain){
+                console.log('login failed');
+                k=0;
+                firstRun=true;
+            }
             console.log(samesizes);
             if (k !== 0 && list[k - 1].url !== list[k].url && samesizes.length !== 0) {
                 // console.log(samesizes);
