@@ -133,7 +133,7 @@ Scenario('monitor nike', async function(I) {
                 } else if (htmlcontext === 'price updated') {
                     // console.log('==== 3');
                     availiabled = true;
-                } else if (htmlcontext && htmlcontext.indexOf("input") !== -1 && htmlcontext.indexOf(list[k].size) === -1) {
+                } else if (htmlcontext && htmlcontext.indexOf(list[k].size + '</label>') === -1) {
                     I.wait(2);
 
                     console.log('re get the right html context');
