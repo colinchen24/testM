@@ -54,7 +54,7 @@ Scenario('monitor nike', async function(I) {
         try {
             if (k === 0 || (k !== 0 && list[k - 1].url !== list[k].url)) {
 
-                console.log('k = 0 or url different ==' + k + "url " + list[k].url + " size " + list[k].size);
+                console.log('k = 0 or url different == ' + k + " url " + list[k].url + " size " + list[k].size);
 
                 if (samesizes.length !== 0) {
                     console.log('save track: ' + list[k].url);
@@ -111,11 +111,10 @@ Scenario('monitor nike', async function(I) {
                     }
                 }
 
-                console.log("====================" + sleeptime + "====================");
+                // console.log("====================" + sleeptime + "====================");
                 if (sleeptime > 0) {
                     // I.wait(sleeptime);
                 }
-                console.log(htmlcontext);
 
             }
 
@@ -167,7 +166,7 @@ Scenario('monitor nike', async function(I) {
                         }
                     }, list[k].url, list[k].size, list[k].price);
 
-                    console.log("======" + htmlcontext);
+                    // console.log("======" + htmlcontext);
 
                     if (htmlcontext.split(list[k].size + '</label>').length > 1 && htmlcontext.split(list[k].size + '</label>')[0].split("<input")[htmlcontext.split(list[k].size + '</label>')[0].split("<input").length - 1].indexOf('disabled') === -1) {
                         availiabled = true;
@@ -181,7 +180,7 @@ Scenario('monitor nike', async function(I) {
                         falseFlag = true;
                 } 
 
-
+                console.log( list[k].url + " ----- " + list[k].size + " ----- " + availiabled + " ----- " + htmlcontext);
 
                 var now = getZoneTime();
                 if (availiabled) {
