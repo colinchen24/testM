@@ -96,6 +96,8 @@ Scenario('monitor nike', async function(I) {
 
                     } else if (document.getElementById('RightRail') && document.getElementById('RightRail').innerText.indexOf('售罄：') !== -1) {
                         return "out of stock"
+                    } else {
+                        return "htmlcontext"
                     }
                 }, list[k].url, list[k].size, list[k].price);
 
