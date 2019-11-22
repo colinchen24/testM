@@ -46,6 +46,7 @@ Scenario('monitor nike', async function(I) {
     var now = getZoneTime();
     var k = Math.floor(Math.random() * Math.floor(list.length))
     var htmlcontext = 'htmlcontext';
+    var falseFlag = false;
     for (k; k < list.length; k++) {
 
         console.log('k = 0 or url different ==' + k + "url " + list[k].url + " size " + list[k].size);
@@ -113,6 +114,7 @@ Scenario('monitor nike', async function(I) {
             }
 
             availiabled = false;
+            falseFlag = false;
             
             if (htmlcontext !== "Forbidden" && htmlcontext !== "htmlcontext") {
                 // console.log('access');
@@ -120,6 +122,7 @@ Scenario('monitor nike', async function(I) {
                 if (htmlcontext === "url changed" || htmlcontext === "out of stock") {
                     console.log('==== 1');
                     availiabled = false;
+                    falseFlag =true;
                 } else if (htmlcontext === 'new updated') {
                     console.log('==== 2');
                     availiabled = true;
@@ -142,7 +145,7 @@ Scenario('monitor nike', async function(I) {
                         "utctime": now
                     })
 
-                } else {
+                } else if(falseFlag) {
                     samesizes.push({
                         "url": list[k].url,
                         "size": list[k].size,
