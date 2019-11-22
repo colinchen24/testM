@@ -126,7 +126,7 @@ Scenario('monitor nike', async function(I) {
                 } else if (htmlcontext === 'price updated') {
                     console.log('==== 3');
                     availiabled = true;
-                } else if (htmlcontext.split(list[k].size + '"').length > 1 && htmlcontext.split(list[k].size + '"')[1].split("class=")[0].indexOf('disabled') === -1) {
+                } else if (htmlcontext.split(list[k].size + '</label>').length > 1 && htmlcontext.split(list[k].size + '</label>')[0].split("<input")[htmlcontext.split(list[k].size + '</label>')[0].split("<input").length -1 ].indexOf('disabled') === -1) {
                     console.log('==== 4');
                     availiabled = true;
                 }
