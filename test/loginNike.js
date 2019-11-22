@@ -6,14 +6,14 @@ Scenario('monitor nike', async function(I) {
 
     // console.log(process.env.TIME)
 
-    var sleeptime = 5;
+    var sleeptime = 1;
 
     switch (process.env.TIME) {
         case "sh":
             sleeptime = 1;
             break;
         case "sc":
-            sleeptime = 5;
+            sleeptime = 1;
             break;
     }
 
@@ -52,7 +52,7 @@ Scenario('monitor nike', async function(I) {
             if ((k === 0 && firstRun) || (k !== 0 && list[k - 1].email !== list[k].email) || (!firstRun && k === 0 && list[k].email !== list[list.length -1].email)) {
                 await I.clearCookie();
                 await I.amOnPage('https://www.nike.com/cn/login');
-                I.wait(5);
+                I.wait(1);
                 var login = await I.executeScript(function(email, pw) {
                     if(document.getElementsByClassName("nike-unite-component action-link mobileNumberToEmailLoginLink toggle-action-link").length > 0){
                     document.getElementsByClassName("nike-unite-component action-link mobileNumberToEmailLoginLink toggle-action-link")[0].firstElementChild.click();
@@ -171,6 +171,7 @@ Scenario('monitor nike', async function(I) {
                 k = -1;
                 await I.amOnPage('https://www.nike.com/cn/favorites');
                 I.wait(sleeptime);
+                console.log(await I.grabCurrentUrl());
             }
         } catch (err) {
             console.log(err)
