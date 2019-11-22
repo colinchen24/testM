@@ -52,7 +52,7 @@ Scenario('monitor nike', async function(I) {
             if ((k === 0 && firstRun) || (k !== 0 && list[k - 1].email !== list[k].email) || (!firstRun && k === 0 && list[k].email !== list[list.length -1].email)) {
                 await I.clearCookie();
                 await I.amOnPage('https://www.nike.com/cn/login');
-                I.wait(1);
+                I.wait(5);
                 var login = await I.executeScript(function(email, pw) {
                     if(document.getElementsByClassName("nike-unite-component action-link mobileNumberToEmailLoginLink toggle-action-link").length > 0){
                     document.getElementsByClassName("nike-unite-component action-link mobileNumberToEmailLoginLink toggle-action-link")[0].firstElementChild.click();
