@@ -111,7 +111,7 @@ Scenario('monitor nike', async function(I) {
 
                 console.log("====================" + sleeptime + "====================");
                 if (sleeptime > 0) {
-                    I.wait(sleeptime);
+                    // I.wait(sleeptime);
                 }
                 console.log(htmlcontext);
 
