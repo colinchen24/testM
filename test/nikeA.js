@@ -134,7 +134,7 @@ Scenario('monitor nike', async function(I) {
                     // console.log('==== 3');
                     availiabled = true;
                 } else if (htmlcontext.indexOf(list[k].size) === -1) {
-                    I.await(2);
+                    I.wait(2);
 
                     htmlcontext = await I.executeScript(function(url, size, price) {
                         if (!"".replaceAll) {
