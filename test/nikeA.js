@@ -82,7 +82,7 @@ Scenario('monitor nike', async function(I) {
                     if (document.body.innerText.indexOf('NikePlus') === -1 || document.body.innerText.indexOf('Forbidden access') !== -1) {
                         // console.log('no document');
                         return "Forbidden"
-                    } else if (window.location.href !== url) {
+                    } else if (url.split('/')[url.split('/').length-1].length > 20 || window.location.href.indexOf(url.split('/')[url.split('/').length-1]) === -1) {
                         return "url changed";
                     } else if (url === 'https://www.nike.com/cn/w/new-shoes-3n82yzy7ok?sort=newest' && document.getElementsByClassName('product-card__body').length > 2 &&
                         (document.getElementsByClassName('product-card__body')[0].innerText.replaceAll('\n', '').indexOf(size.split('&')[0]) === -1 || document.getElementsByClassName('product-card__body')[1].innerText.replaceAll('\n', '').indexOf(size.split('&')[1]) === -1 || document.getElementsByClassName('product-card__body')[2].innerText.replaceAll('\n', '').indexOf(size.split('&')[2]) === -1)
