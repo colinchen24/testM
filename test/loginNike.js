@@ -13,7 +13,7 @@ Scenario('monitor nike', async function(I) {
             sleeptime = 1;
             break;
         case "sc":
-            sleeptime = 1;
+            sleeptime = 5;
             break;
     }
 
