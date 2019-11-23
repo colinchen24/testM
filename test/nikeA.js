@@ -47,6 +47,7 @@ Scenario('monitor nike', async function(I) {
     var k = Math.floor(Math.random() * Math.floor(list.length))
     var htmlcontext = 'htmlcontext';
     var falseFlag = false;
+    var clearcash;
     for (k; k < list.length; k++) {
 
 
@@ -54,8 +55,8 @@ Scenario('monitor nike', async function(I) {
         try {
             if (k === 0 || (k !== 0 && list[k - 1].url !== list[k].url)) {
 
-                await I.executeScript(function() {
-                    localStorage.clear();
+                clearcash = await I.executeScript(function() {
+                    return localStorage.clear();
                 });
 
                 console.log('k = 0 or url different == ' + k + " url " + list[k].url + " size " + list[k].size);
