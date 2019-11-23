@@ -55,10 +55,6 @@ Scenario('monitor nike', async function(I) {
         try {
             if (k === 0 || (k !== 0 && list[k - 1].url !== list[k].url)) {
 
-                clearcash = await I.executeScript(function() {
-                   localStorage.clear();
-                   return true;
-                });
 
                 console.log('k = 0 or url different == ' + k + " url " + list[k].url + " size " + list[k].size);
 
@@ -73,6 +69,7 @@ Scenario('monitor nike', async function(I) {
                 // I.wait(2)
                 // I.wait(sleeptime);
                 await I.amOnPage(list[k].url);
+
                 // I.saveScreenshot('result.jpg');
                 // I.wait(sleeptime);
                 htmlcontext = "htmlcontext";
@@ -199,6 +196,10 @@ Scenario('monitor nike', async function(I) {
                         "utctime": now
                     })
 
+                    clearcash = await I.executeScript(function() {
+                        return localStorage.clear();
+                    });
+
                 } else if (falseFlag) {
                     samesizes.push({
                         "url": list[k].url,
@@ -207,6 +208,9 @@ Scenario('monitor nike', async function(I) {
                         "time": now,
                         "utctime": now
                     })
+                    clearcash = await I.executeScript(function() {
+                        return localStorage.clear();
+                    });
                 }
             }
 
