@@ -5,7 +5,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 var chromeOptions = {
     "useAutomationExtension": false,
     // "args": ["--disable-web-security"]
-    "args": ["--no-sandbox","--incognito","--headless","--disable-dev-shm-usage", "--disable-gpu", "--blink-settings=imagesEnabled=false","--disable-web-security"]
+    "args": ["--window-size=1800,1600","--no-sandbox","--incognito","--headless","--disable-dev-shm-usage", "--disable-gpu", "--blink-settings=imagesEnabled=false","--disable-web-security"]
     // "args": ["--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_1_1 like Mac OS X) AppleWebKit/602.2.14 (KHTML, like Gecko)","--window-size=375,812"]
 };
 
