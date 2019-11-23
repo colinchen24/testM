@@ -113,7 +113,7 @@ Scenario('monitor nike', async function(I) {
 
                 // console.log("====================" + sleeptime + "====================");
                 if (sleeptime > 0) {
-                    // I.wait(sleeptime);
+                    I.wait(sleeptime);
                 }
 
             }
@@ -123,7 +123,7 @@ Scenario('monitor nike', async function(I) {
 
             if (htmlcontext !== "Forbidden" && htmlcontext !== "htmlcontext") {
                 // console.log('access');
-
+                
                 if (htmlcontext === "url changed" || htmlcontext === "out of stock") {
                     // console.log('==== 1');
                     availiabled = false;
