@@ -54,6 +54,10 @@ Scenario('monitor nike', async function(I) {
         try {
             if (k === 0 || (k !== 0 && list[k - 1].url !== list[k].url)) {
 
+                await I.executeScript(function() {
+                    localStorage.clear();
+                });
+
                 console.log('k = 0 or url different == ' + k + " url " + list[k].url + " size " + list[k].size);
 
                 if (samesizes.length !== 0) {
@@ -123,7 +127,7 @@ Scenario('monitor nike', async function(I) {
 
             if (htmlcontext !== "Forbidden" && htmlcontext !== "htmlcontext") {
                 // console.log('access');
-                
+
                 if (htmlcontext === "url changed" || htmlcontext === "out of stock") {
                     // console.log('==== 1');
                     availiabled = false;
