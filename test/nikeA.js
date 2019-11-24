@@ -195,7 +195,7 @@ Scenario('monitor nike', async function(I) {
                         "time": now,
                         "utctime": now
                     })
-
+                    
                     clearcash = await I.executeScript(function() {
                         return localStorage.clear();
                     });

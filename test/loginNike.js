@@ -88,6 +88,8 @@ Scenario('monitor nike', async function(I) {
                 k=0;
                 firstRun=true;
             }
+            I.scrollPageToBottom();
+            I.wait(3);
             console.log(samesizes);
             if (k !== 0 && list[k - 1].url !== list[k].url && samesizes.length !== 0) {
                 // console.log(samesizes);
