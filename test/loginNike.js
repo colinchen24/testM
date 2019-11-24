@@ -51,6 +51,7 @@ Scenario('monitor nike', async function(I) {
         try {
             if ((k === 0 && firstRun) || (k !== 0 && list[k - 1].email !== list[k].email) || (!firstRun && k === 0 && list[k].email !== list[list.length -1].email)) {
                 await I.clearCookie();
+                firstRun = false;
                 await I.amOnPage('https://www.nike.com/cn/login');
                 I.wait(1);
                 var login = await I.executeScript(function(email, pw) {
@@ -64,29 +65,35 @@ Scenario('monitor nike', async function(I) {
                 }, list[k].email, 'Pzz1990.');
 
 
-                I.wait(sleeptime);
+                I.wait(3);
                 var loginAgain = false;
 
                 loginAgain = await I.executeScript(function(){
-                    if(document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component").length > 0 || document.getElementsByName('emailAddress').length > 0){
+                    if(document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component").length > 0 || document.getElementsByName('password').length > 0){
                         return true;
+                    } else{
+                        return false;
                     }
                 })
                 // I.saveScreenshot('result0.jpg');
                 await I.amOnPage('https://www.nike.com/cn/favorites');
 
-                I.wait(sleeptime);
-
+                I.wait(1);
+                if(!loginAgain){
                 loginAgain = await I.executeScript(function(){
-                    if(document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component").length > 0 || document.getElementsByName('emailAddress').length > 0){
+                    if(document.getElementsByClassName("nike-unite-submit-button loginSubmit nike-unite-component").length > 0 || document.getElementsByName('password').length > 0){
                         return true;
+                    } else{
+                        return false;
                     }
                 })
+                }
+                console.log("=======" + loginAgain)
             }
             if(loginAgain){
                 console.log('login failed');
-                k=0;
                 firstRun=true;
+                k=-1;
             }
             console.log(samesizes);
             if (k !== 0 && list[k - 1].url !== list[k].url && samesizes.length !== 0) {
@@ -102,7 +109,7 @@ Scenario('monitor nike', async function(I) {
             }
 
             // I.wait(2);
-            firstRun = false;
+            
 
             urlindex = await I.executeScript(function(url) {
                 var k = 999;
