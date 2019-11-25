@@ -134,8 +134,8 @@ Scenario('monitor nike', async function(I) {
             if (urlindex !== 999) {
                 // I.wait(1);
                 var buttoncontext = await I.executeScript(function(num) {
-                    if (document.getElementsByClassName('css-1isv87d e1ocvqf40').length !== 0) {
-                        return document.getElementsByClassName('css-1isv87d e1ocvqf40')[num].innerText;
+                    if (document.getElementsByClassName('css-1isv87d e1mo9wgj0').length !== 0) {
+                        return document.getElementsByClassName('css-1isv87d e1mo9wgj0')[num].innerText;
                     } else {
                         return "not found"
                     }
@@ -153,13 +153,13 @@ Scenario('monitor nike', async function(I) {
                 } else if (buttoncontext === "选择尺码") {
                     var sizehtml = await I.executeScript(function(num) {
                         document.getElementsByClassName('ncss-col-sm-12 css-1pzxakv wishlist-grid-actions')[num].firstElementChild.click();
-                        return document.getElementsByClassName('size-selector-wrapper e109n9an3 css-9be9yh')[0].innerHTML
+                        return document.getElementsByClassName('size-selector-wrapper e1cwsdoj3 css-9be9yh')[0].innerHTML
                     }, urlindex);
 
                     // console.log(sizehtml);
                     // I.wait(1);
 
-                    if (sizehtml.split('"' + list[k].size + '"')[1].split('>' + list[k].size + '<')[0].indexOf('disabled=""') === -1) {
+                    if (sizehtml.split(list[k].size + '</label>').length > 1 && sizehtml.split(list[k].size + '</label>')[0].split("<input")[sizehtml.split(list[k].size + '</label>')[0].split("<input").length - 1].indexOf('disabled') === -1) {
                         availiabled = true
                     } else {
                         availiabled = false
