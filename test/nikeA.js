@@ -50,8 +50,6 @@ Scenario('monitor nike', async function(I) {
     var clearcash = false;
     for (k; k < list.length; k++) {
 
-
-
         try {
             if (k === 0 || (k !== 0 && list[k - 1].url !== list[k].url)) {
 
@@ -82,7 +80,7 @@ Scenario('monitor nike', async function(I) {
                         };
                     }
 
-                    if (document.body.innerText.indexOf('NikePlus') === -1 || document.body.innerText.indexOf('Forbidden access') !== -1) {
+                    if (document.body.innerText.indexOf('Forbidden access') !== -1) {
                         // console.log('no document');
                         return "Forbidden"
                     } else if (url.split('/')[url.split('/').length-1].length > 20 || window.location.href.indexOf(url.split('/')[url.split('/').length-1]) === -1) {
