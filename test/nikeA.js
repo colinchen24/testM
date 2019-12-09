@@ -109,7 +109,7 @@ Scenario('monitor nike', async function(I) {
                         sleeptime--;
                     }
                 } else if (htmlcontext === "Forbidden") {
-                    if (sleeptime < 5) {
+                    if (sleeptime < 2) {
                         sleeptime++;
                     }
                 }
